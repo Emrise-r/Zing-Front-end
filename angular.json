@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Zing-Front-End"
+    }
+  },
+  "defaultProject": "Zing-Front-End",
+  "cli": {
+    "analytics": "02c50999-044c-460f-a3e3-c0d2391c0f8e"
+  }
 }
