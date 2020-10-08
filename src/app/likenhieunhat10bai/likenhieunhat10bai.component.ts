@@ -8,7 +8,7 @@ import {ISongService} from "../isong.service";
   styleUrls: ['./likenhieunhat10bai.component.scss']
 })
 export class Likenhieunhat10baiComponent implements OnInit {
-  songListLike10: ISong[] = []
+  songListLike6: ISong[] = []
   songListLike30: ISong[] = []
 
   constructor(private iSongService: ISongService) {
@@ -20,11 +20,11 @@ export class Likenhieunhat10baiComponent implements OnInit {
 
   getAllSong10(): ISong[] {
     this.iSongService.getAllSongByLikes().subscribe(p => {
-      for (let i = 0; i < 10; i++) {
-        this.songListLike10.push(p[i]);
+      for (let i = 0; i < 6; i++) {
+        this.songListLike6.push(p[i]);
       }
     })
-    return this.songListLike10;
+    return this.songListLike6;
   }
 
   getAllSong30(): ISong[] {

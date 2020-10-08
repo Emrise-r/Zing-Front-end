@@ -8,7 +8,7 @@ import {ISongService} from "../isong.service";
   styleUrls: ['./nghenhieunhat.component.scss']
 })
 export class NghenhieunhatComponent implements OnInit {
-  songList10: ISong[] = [];
+  songList6: ISong[] = [];
   songList30: ISong[] = [];
   constructor(private iSongService: ISongService) {
     this.getAllSong10();
@@ -19,11 +19,11 @@ export class NghenhieunhatComponent implements OnInit {
 
   getAllSong10(): ISong[] {
     this.iSongService.getAllSongByPlay().subscribe(p => {
-      for (let i = 0; i < 10; i++) {
-        this.songList10.push(p[i]);
+      for (let i = 0; i < 6; i++) {
+        this.songList6.push(p[i]);
       }
     })
-    return this.songList10;
+    return this.songList6;
   }
   getAllSong30(): ISong[] {
     this.iSongService.getAllSongByPlay().subscribe(p => {

@@ -8,8 +8,9 @@ import {ISongService} from "../isong.service";
   styleUrls: ['./baimoitao.component.scss']
 })
 export class BaimoitaoComponent implements OnInit {
-  songListDate10: ISong[] = [];
+  songListDate6: ISong[] = [];
   songListDate30: ISong[] = [];
+
   constructor(private iSongService: ISongService) {
   }
 
@@ -19,11 +20,11 @@ export class BaimoitaoComponent implements OnInit {
 
   getAllSong10(): ISong[] {
     this.iSongService.getAllSongByDate().subscribe(p => {
-      for (let i = 0; i < 10; i++) {
-        this.songListDate10.push(p[i])
+      for (let i = 0; i < 6; i++) {
+        this.songListDate6.push(p[i])
       }
     })
-    return this.songListDate10;
+    return this.songListDate6;
   }
   getAllSong30(): ISong[] {
     this.iSongService.getAllSongByDate().subscribe(p => {
