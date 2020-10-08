@@ -3,7 +3,7 @@ import {ISong} from "../isong";
 import {ISongService} from "../isong.service";
 
 @Component({
-  selector: 'app-nghenhieunhat10bai',
+  selector: 'app-nghenhieunhat',
   templateUrl: './nghenhieunhat.component.html',
   styleUrls: ['./nghenhieunhat.component.scss']
 })

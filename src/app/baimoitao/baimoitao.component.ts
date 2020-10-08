@@ -3,7 +3,7 @@ import {ISong} from "../isong";
 import {ISongService} from "../isong.service";
 
 @Component({
-  selector: 'app-baimoitao10',
+  selector: 'app-baimoitao',
   templateUrl: './baimoitao.component.html',
   styleUrls: ['./baimoitao.component.scss']
 })
