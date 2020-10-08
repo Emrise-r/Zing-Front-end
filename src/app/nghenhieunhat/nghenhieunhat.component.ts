@@ -9,7 +9,7 @@ import {ISongService} from "../isong.service";
 })
 export class NghenhieunhatComponent implements OnInit {
   songList6: ISong[] = [];
-  songList30: ISong[] = [];
+
   constructor(private iSongService: ISongService) {
     this.getAllSong10();
   }
@@ -25,12 +25,5 @@ export class NghenhieunhatComponent implements OnInit {
     })
     return this.songList6;
   }
-  getAllSong30(): ISong[] {
-    this.iSongService.getAllSongByPlay().subscribe(p => {
-      for (let i = 0; i < 30; i++) {
-        this.songList30.push(p[i]);
-      }
-    })
-    return this.songList30;
-  }
+
 }

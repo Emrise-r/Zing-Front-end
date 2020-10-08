@@ -1,21 +1,22 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {BaimoitaoComponent} from "./baimoitao/baimoitao.component";
-import {NghenhieunhatComponent} from "./nghenhieunhat/nghenhieunhat.component";
-import {Likenhieunhat10baiComponent} from "./likenhieunhat10bai/likenhieunhat10bai.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+
+import {HomeComponent} from "./home/home.component";
+import {Baimoitao30Component} from "./baimoitao30/baimoitao30.component";
+import {Top30Component} from "./top30/top30.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: BaimoitaoComponent
+    component: HomeComponent
   },
   {
-    path: '',
-    component: NghenhieunhatComponent
+    path: 'newSong30',
+    component: Baimoitao30Component
   },
   {
-    path: '',
-    component: Likenhieunhat10baiComponent
+    path: 'top30',
+    component: Top30Component
   }
 ];
 
@@ -23,4 +24,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

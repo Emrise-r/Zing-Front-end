@@ -9,7 +9,7 @@ import {ISongService} from "../isong.service";
 })
 export class BaimoitaoComponent implements OnInit {
   songListDate6: ISong[] = [];
-  songListDate30: ISong[] = [];
+
 
   constructor(private iSongService: ISongService) {
   }
@@ -26,12 +26,5 @@ export class BaimoitaoComponent implements OnInit {
     })
     return this.songListDate6;
   }
-  getAllSong30(): ISong[] {
-    this.iSongService.getAllSongByDate().subscribe(p => {
-      for (let i = 0; i < 30; i++) {
-        this.songListDate30.push(p[i])
-      }
-    })
-    return this.songListDate30;
-  }
+
 }
