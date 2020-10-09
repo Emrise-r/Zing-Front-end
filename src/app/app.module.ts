@@ -12,6 +12,10 @@ import { Baimoitao30Component } from './baimoitao30/baimoitao30.component';
 import { HomeComponent } from './home/home.component';
 import { Top30Component } from './top30/top30.component';
 import { TopLikeComponent } from './top-like/top-like.component';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import { CreateSongComponent } from './create-song/create-song.component';
 
 
 @NgModule({
@@ -24,13 +28,14 @@ import { TopLikeComponent } from './top-like/top-like.component';
     HomeComponent,
     Top30Component,
     TopLikeComponent,
-
-
+    CreateSongComponent,
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

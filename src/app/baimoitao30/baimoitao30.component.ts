@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ISong} from "../isong";
-import {ISongService} from "../isong.service";
+import {ISong} from "../interface/isong";
+import {ISongService} from "../service/isong.service";
 
 @Component({
   selector: 'app-baimoitao30',
@@ -17,10 +17,13 @@ export class Baimoitao30Component implements OnInit {
   }
   getAllSong30(): ISong[] {
     this.iSongService.getAllSongByDate().subscribe(p => {
-      for (let i = 0; i < 30; i++) {
-        this.songListDate30.push(p[i])
-      }
-    })
+      console.log(p);
+      this.songListDate30 = p
+    //   for (let i = 0; i < 30; i++) {
+    //     this.songListDate30.push(p[i])
+    //   }
+    });
+    console.log(this.songListDate30)
     return this.songListDate30;
   }
 }
