@@ -1,3 +1,5 @@
+import {Iuser} from './iuser';
+
 export interface ISong {
   songId?: number;
   name?: string;
@@ -10,5 +12,5 @@ export interface ISong {
   genre?: string;
   plays?: number;
   likes?:number;
-  user?: any;
+  user?: Iuser;
 }
