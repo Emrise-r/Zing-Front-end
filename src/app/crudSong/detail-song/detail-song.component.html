@@ -1,0 +1,27 @@
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/breadcumb.jpg);">
+  <div class="bradcumbContent">
+    <p>See what's </p>
+    <h2>YOUR SONG</h2>
+  </div>
+</section>
+<br>
+<br>
+
+<div style="width: 90%;margin-left: 5%">
+  <a class="btn btn-outline-primary" [routerLink]="['/personal']">Back to list</a>
+  <br>
+  <br>
+  <h3>Detail Song</h3>
+  <div *ngIf="song">
+    <div>
+    <span class="font-weight-bold"></span><img src="assets/img/bg-img/{{song.img}}" alt=""
+                                               style="width: 200px;height: 200px"><br>
+    </div>
+
+    <span class="font-weight-bold">Name: </span><span>{{song.name}}</span><br>
+    <span class="font-weight-bold">Date:</span><span>{{song.date}}</span><br>
+    <span class="font-weight-bold">Genre:</span><span>{{song.genre}}</span><br>
+    <span class="font-weight-bold">Artist: </span><span>{{song.artist}}</span><br>
+    <span class="font-weight-bold">Description: </span><span>{{song.description}}</span><br>
+  </div>
+</div>

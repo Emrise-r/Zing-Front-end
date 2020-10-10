@@ -1,0 +1,49 @@
+
+
+<section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/breadcumb.jpg);">
+  <div class="bradcumbContent">
+    <p>See what's </p>
+    <h2>YOUR SONG</h2>
+  </div>
+</section>
+<br>
+<br>
+
+
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="text-center">Edit Song</h2>
+    </div>
+    <form [formGroup]="songForm">
+      <div class="panel-body" >
+        <div class="form-group">
+          <input type="text" name="id" formControlName="id" [ngModel]="song.songId" hidden>
+          <div>
+            <label for="name">Name:
+              <input type="text" id="name" name="name" formControlName="name" [ngModel]="song.name"
+                     class="form-control" style="width: 1000px">
+            </label>
+          </div>
+          <div>
+            <label for="artist">Artist:
+              <input type="text" id="artist" name="artist" formControlName="artist" [ngModel]="song.artist"
+                     class="form-control" style="width: 1000px">
+            </label>
+          </div>
+          <div>
+            <label for="description">Description:
+              <textarea type="text" id="description" name="description" formControlName="description" rows="5"
+                        [ngModel]="song.description" class="form-control" style="width: 1000px"></textarea>
+            </label>
+          </div>
+          <div>
+            <input class="btn btn-outline-primary" type="submit" value="Save" (click)="editSong()">
+            <a class="btn btn-outline-primary" [routerLink]="['/personal']" style="margin-left: 2%">Back</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>
