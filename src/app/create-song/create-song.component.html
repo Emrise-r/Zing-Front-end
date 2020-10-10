@@ -1,1 +1,43 @@
-<p>create-song works!</p>
+<form [formGroup]= "songForm" >
+  <div class="form-group">
+    <label>Song Name</label>
+    <input type="text" class="form-control" formControlName="name" placeholder="Song Name">
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+         class="alert alert-danger">
+      <div *ngIf="name.errors.required">
+        Song Name Not Emty
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Artist</label>
+      <input type="text" class="form-control" formControlName="Artist"  placeholder="artist">
+      <div *ngIf="artist.invalid && (artist.dirty || artist.touched)"
+           class="alert alert-danger">
+        <div *ngIf="artist.errors.required">
+          Artist Not Emty
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Genre</label>
+      <input type="text" class="form-control" formControlName="genre"  placeholder="genre">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Mô tả</label>
+      <textarea class="form-control " formControlName="description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mô tả" rows="10" cols="5"></textarea>
+    </div>
+
+    <div>
+      <label>Song</label>
+      <input type="file" class="form-control" formControlName="songFile" (change)="checkFile($event)"  placeholder="songFile">
+      <div *ngIf="checkSongFile">
+        Just MP3 Only
+      </div>
+    </div>
+
+  </div>
+  <button type="submit"  class="btn btn-primary" (click)="submit()">Submit</button>
+  <button  class="btn btn-success" routerLink="">Thoat</button>
+</form>

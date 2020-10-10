@@ -16,6 +16,7 @@ import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import { CreateSongComponent } from './create-song/create-song.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -31,11 +32,13 @@ import { CreateSongComponent } from './create-song/create-song.component';
     CreateSongComponent,
   ],
   imports: [
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireStorageModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
