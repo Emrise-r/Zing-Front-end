@@ -1,0 +1,14 @@
+
+
+<div class="fixed-bottom" *ngIf="song">
+  <div class="song-play-area">
+    <div class="song-name">
+      <p>{{song.name}}</p>
+      <audio autoplay controls src="assets/audio/{{song.name}}.mp3">
+      </audio>
+    </div>
+  </div>
+</div>
+
+
+

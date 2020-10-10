@@ -4,14 +4,14 @@
   <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let p of songListLike6">
     <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
       <div class="album-thumb">
-        <img src="assets/img/bg-img/{{p.img}}" alt="">
+        <img src="assets/img/bg-img/{{p.cover_art_url}}" alt="">
         <!-- Play Icon -->
         <div class="play-icon">
           <a href="#" class="video--play--btn"><span class="icon-play-button"></span></a>
         </div>
       </div>
       <div class="album-info">
-        <a href="#">
+        <a [href]="'http://localhost:4200/'+ p.songId"  >
           <h5>{{p.name}}</h5>
         </a>
         <p>Radio Station</p>

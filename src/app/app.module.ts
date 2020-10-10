@@ -12,6 +12,9 @@ import { Baimoitao30Component } from './baimoitao30/baimoitao30.component';
 import { HomeComponent } from './home/home.component';
 import { Top30Component } from './top30/top30.component';
 import { TopLikeComponent } from './top-like/top-like.component';
+import { PlaymusicComponent } from './playmusic/playmusic.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -24,13 +27,17 @@ import { TopLikeComponent } from './top-like/top-like.component';
     HomeComponent,
     Top30Component,
     TopLikeComponent,
+    PlaymusicComponent,
+    LoginComponent,
 
 
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

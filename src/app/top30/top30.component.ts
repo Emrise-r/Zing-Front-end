@@ -16,10 +16,16 @@ songList30: ISong[] = [];
   }
   getAllSong30(): ISong[] {
     this.iSongService.getAllSongByPlay().subscribe(p => {
-      for (let i = 0; i < 30; i++) {
-        this.songList30.push(p[i]);
+      if(p.length < 30) {
+        for (let i = 0; i < p.length; i++) {
+          this.songList30.push(p[i]);
+        }
+      } else {
+        for (let i = 0; i < 30; i++) {
+          this.songList30.push(p[i]);
+        }
       }
-    })
+     })
     return this.songList30;
   }
 }
