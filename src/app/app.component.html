@@ -37,19 +37,26 @@
 <!--                <li><a [routerLink]="'/top30'">TOP LIKE</a></li>-->
                 <li><a [routerLink]="'/newSong30'">NEWS SONG</a></li>
                 <li><a [routerLink]="'/contact'">CONTACT</a></li>
-                <li><a [routerLink]="'/personal'">PERSONAL MUSIC</a></li>
+<!--                <li><a [routerLink]="'/personal'">PERSONAL MUSIC</a></li>-->
               </ul>
-              <!-- Login/Register & Cart Button -->
+              <!--               Login/Register -->
               <div class="login-register-cart-button d-flex align-items-center">
-                <!-- Login/Register -->
                 <div class="login-register-btn mr-50">
-                  <a href="login.html" id="loginBtn">Login / Register</a>
-                </div>
-                <!-- Cart Button -->
-                <div class="cart-btn">
-                  <p><span class="icon-shopping-cart"></span> <span class="quantity">1</span></p>
+                  <div *ngIf="loginRequest; else tmp">
+                    <span>hi: {{loginRequest.username}}</span> |
+                    <span><a [href]="'http://localhost:4200'"(click)="logOut()">Log out</a></span> |
+                    <span><a [routerLink]="'/personal'">PERSONAL MUSIC</a></span>
+                    </div>
                 </div>
               </div>
+              <ng-template #tmp>
+                <div class="login-register-cart-button d-flex align-items-center">
+                  <!-- Login/Register -->
+                  <div class="login-register-btn mr-50">
+                    <a [routerLink]="'/login'" id="loginBtn">Login</a> | <a id="loginBtn1">Register</a>
+                  </div>
+                </div>
+              </ng-template>
             </div>
             <!-- Nav End -->
           </div>

@@ -10,12 +10,14 @@ import {EditSongComponent} from './crudSong/edit-song/edit-song.component';
 import {DeleteSongComponent} from './crudSong/delete-song/delete-song.component';
 import {DetailSongComponent} from './crudSong/detail-song/detail-song.component';
 
+import {PlaymusicComponent} from "./playmusic/playmusic.component";
+import {LoginComponent} from "./login/login.component";
 
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'newSong30',
@@ -26,7 +28,10 @@ const routes: Routes = [
     component: Top30Component
   },
   {
-
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: 'personal',
     component: ListSongComponent,
   },
@@ -49,7 +54,32 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateSongComponent
-  }
+  },
+  {
+    path: '',
+    component: HomeComponent,
+    children: [{
+      path: ':id',
+      component: PlaymusicComponent
+    }]
+  },
+  {
+    path: 'newSong30',
+    component: Baimoitao30Component,
+    children: [{
+      path: ':id',
+      component: PlaymusicComponent
+    }]
+  },
+  {
+    path: 'top30',
+    component: Top30Component,
+    children: [{
+      path: ':id',
+      component: PlaymusicComponent
+    }]
+  },
+
 ];
 
 @NgModule({

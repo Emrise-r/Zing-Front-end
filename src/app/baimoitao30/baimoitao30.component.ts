@@ -18,17 +18,16 @@ export class Baimoitao30Component implements OnInit {
   }
   getAllSong30(): ISong[] {
     this.iSongService.getAllSongByDate().subscribe(p => {
-
-      for (let i = 0; i < 30; i++) {
-        this.songListDate30.push(p[i]);
+      if(p.length < 30) {
+        for (let i = 0; i < p.length; i++) {
+          this.songListDate30.push(p[i])
+        }
+      } else {
+        for (let i = 0; i < 30; i++) {
+          this.songListDate30.push(p[i])
+        }
       }
-      console.log(p);
-      this.songListDate30 = p;
-    //   for (let i = 0; i < 30; i++) {
-    //     this.songListDate30.push(p[i])
-    //   }
-    });
-    console.log(this.songListDate30);
+     })
     return this.songListDate30;
   }
 }

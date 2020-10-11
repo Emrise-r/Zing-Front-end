@@ -18,21 +18,24 @@ export class ISongService {
   constructor(private http: HttpClient) {
   }
 
+
   getAllSongByPlay(): Observable<ISong[]> {
-    return this.http.get<ISong[]>(API_URL + `/plays/desc`);
+    return this.http.get<ISong[]>(API_URL + `/plays/desc`)
   }
 
   getAllSongByLikes(): Observable<ISong[]> {
-    return this.http.get<ISong[]>(API_URL + `/likes/desc`);
+    return this.http.get<ISong[]>(API_URL + `/likes/desc`)
   }
 
   getAllSongByDate(): Observable<ISong[]> {
-    return this.http.get<ISong[]>(API_URL + `/date/desc`);
+    return this.http.get<ISong[]>(API_URL + `/date/desc`)
   }
   getSongByID(id: number): Observable<ISong> {
-    return this.http.get<ISong>(API_URL + `/${id}`);
+    return this.http.get<ISong>(API_URL + `/${id}`)
   }
-
+  getUser(id: number): Observable<ISong> {
+    return this.http.get<ISong>(API_URL + `/songs/${id}`)
+  }
   createSong(song: ISong): Observable<ISong>{
     return this.http.post<ISong>(API_URL + `/create`, song);
   }
@@ -43,8 +46,8 @@ export class ISongService {
   deleteSong(id: number): Observable<ISong> {
     return  this.http.delete<ISong>(API_URL + `/delete/${id}`);
   }
-  getAllSongByUser(): Observable<ISong[]>{
-    return this.http.get<ISong[]>(API_URL + `/listByUid/${2}`);
+  getAllSongByUser(id: number): Observable<ISong[]>{
+    return this.http.get<ISong[]>(API_URL + `/listByUid/${id}`);
   }
 }
 

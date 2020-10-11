@@ -12,8 +12,11 @@ import { Baimoitao30Component } from './baimoitao30/baimoitao30.component';
 import { HomeComponent } from './home/home.component';
 import { Top30Component } from './top30/top30.component';
 import { TopLikeComponent } from './top-like/top-like.component';
+import { PlaymusicComponent } from './playmusic/playmusic.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './login/login.component';
+
 import {environment} from '../environments/environment';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CreateSongComponent } from './crudSong/create-song/create-song.component';
 import { DeleteSongComponent } from './crudSong/delete-song/delete-song.component';
 import { EditSongComponent } from './crudSong/edit-song/edit-song.component';
@@ -34,6 +37,9 @@ import {AngularFireModule} from '@angular/fire';
     HomeComponent,
     Top30Component,
     TopLikeComponent,
+    PlaymusicComponent,
+    LoginComponent,
+
     CreateSongComponent,
     DeleteSongComponent,
     EditSongComponent,

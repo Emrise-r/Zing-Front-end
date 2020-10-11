@@ -16,7 +16,7 @@ import {Observable} from 'rxjs';
 export class CreateSongComponent implements OnInit {
 
   user: Iuser = {
-    userId: 5,
+    userId: 1,
 }
   song: ISong = {
     song_url: ''

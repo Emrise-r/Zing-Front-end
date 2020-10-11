@@ -22,7 +22,7 @@ export class DeleteSongComponent implements OnInit {
   }
   delete(): void {
     this.iSongService.deleteSong(this.song.songId).subscribe(
-      next => this.router.navigateByUrl('/songs'));
+      next => this.router.navigateByUrl('/personal'));
     alert('Delete Book success fully!');
   }
 }

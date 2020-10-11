@@ -8,6 +8,7 @@ import {Iuser} from '../../interface/iuser';
 import {Observable, Subscription} from 'rxjs';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {Iloginrequest} from '../../interface/Iloginrequest';
 
 
 @Component({
@@ -17,7 +18,7 @@ import {finalize} from 'rxjs/operators';
 })
 export class EditSongComponent implements OnInit {
   user: Iuser = {
-    userId: 2,
+    userId: 0,
   };
   song: ISong = {
     song_url: ''
@@ -30,13 +31,16 @@ export class EditSongComponent implements OnInit {
   checkUploadedFile = true;
   message: string;
   sub:  Subscription;
-
+  loginRequest: Iloginrequest;
   constructor(private storage: AngularFireStorage,
               private fb: FormBuilder,
               private service: ISongService,
               private activatedRoute: ActivatedRoute,
               private router: Router
   ) {
+    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+    console.log(this.loginRequest.id);
+    this.user.userId = this.loginRequest.id;
   }
 
   ngOnInit(): void {
@@ -46,6 +50,7 @@ export class EditSongComponent implements OnInit {
       genre: [''],
       description: ['']
     });
+    this.checkSongUrl();
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) =>{
       this.song.songId = +paramMap.get('id');
     });
@@ -63,6 +68,11 @@ export class EditSongComponent implements OnInit {
       }
     }
   }
+  checkSongUrl(){
+    if (this.song.song_url){
+      this.checkSongFile = false;
+    }
+  }
 
   submit() {
     this.checkSongFile = false;
@@ -73,9 +83,8 @@ export class EditSongComponent implements OnInit {
     this.song.date = new Date();
     this.song.user = this.user;
     console.log(this.song);
-    this.service.createSong(this.song).subscribe(next => {
-      console.log(next);
-    });
+    this.service.createSong(this.song).subscribe(next => this.router.navigateByUrl('/personal')
+    );
   }
 
   getSongUrl() {
@@ -125,6 +134,7 @@ export class EditSongComponent implements OnInit {
   }
 
   checkform(): boolean {
+    if (this.songForm.invalid || this.song.song_url){}
     if (this.songForm.invalid || this.checkSongFile || this.checkUploadedFile) {
       return true;
     }

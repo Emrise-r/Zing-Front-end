@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ISong} from '../../interface/isong';
 import {ISongService} from '../../service/isong.service';
+import {Iloginrequest} from '../../interface/Iloginrequest';
+import {Iuser} from '../../interface/iuser';
 
 
 @Component({
@@ -9,16 +11,21 @@ import {ISongService} from '../../service/isong.service';
   styleUrls: ['./list-song.component.scss']
 })
 export class ListSongComponent implements OnInit {
-
+  user: Iuser = {
+    userId: 2
+  }
+  loginRequest: Iloginrequest = null;
   songs: ISong[] = [];
   constructor( private iSongService: ISongService) {
-    this.getListSongs();
+    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
   }
 
   ngOnInit(): void {
+    this.getListSongs();
   }
   getListSongs(): ISong[] {
-    this.iSongService.getAllSongByUser().subscribe(p => this.songs = p);
+    this.user.userId = this.loginRequest.id;
+    this.iSongService.getAllSongByUser(this.user.userId).subscribe(p => this.songs = p);
     return this.songs;
   }
 }

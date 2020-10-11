@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import {Iuser} from '../../interface/iuser';
 import {ISong} from '../../interface/isong';
 import {ISongService} from '../../service/isong.service';
+import {Iloginrequest} from '../../interface/Iloginrequest';
 
 @Component({
   selector: 'app-create-song',
@@ -15,11 +16,12 @@ import {ISongService} from '../../service/isong.service';
 })
 export class CreateSongComponent implements OnInit {
   user: Iuser = {
-    userId: 2,
-  };
+    userId:0
+  }
   song: ISong = {
     song_url: ''
   };
+  loginRequest: Iloginrequest = null;
   uploadProgress$: Observable<number>;
   process$: number;
   songForm: FormGroup;
@@ -33,6 +35,9 @@ export class CreateSongComponent implements OnInit {
     private fb: FormBuilder,
     private service: ISongService
   ) {
+    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+    console.log(this.loginRequest.id);
+    this.user.userId = this.loginRequest.id;
   }
 
   ngOnInit(): void {
