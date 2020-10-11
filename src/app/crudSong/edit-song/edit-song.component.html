@@ -38,8 +38,19 @@
             </label>
           </div>
           <div>
+            <label for="genre">Genre:
+              <input type="text" id="genre" name="genre" formControlName="genre" [ngModel]="song.genre"
+                     class="form-control" style="width: 1000px">
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="cover_art_url">Chose file img</label>
+            <input type="file" class="form-control-file" name="cover_art_url" formControlName="cover_art_url"
+                   id="cover_art_url" [ngModel]="song.cover_art_url">
+          </div>
+          <div>
             <input class="btn btn-outline-primary" type="submit" value="Save" (click)="editSong()">
-            <a class="btn btn-outline-primary" [routerLink]="['/personal']" style="margin-left: 2%">Back</a>
+            <a class="btn btn-outline-primary" [routerLink]="['/personal']" style="margin-left: 79.5%">Back</a>
           </div>
         </div>
       </div>

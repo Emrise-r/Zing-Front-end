@@ -1,9 +1,13 @@
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
+import {Baimoitao30Component} from './baimoitao30/baimoitao30.component';
+import {Top30Component} from './top30/top30.component';
+import {ListSongComponent} from './crudSong/list-song/list-song.component';
+import {CreateSongComponent} from './crudSong/create-song/create-song.component';
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-
-import {HomeComponent} from "./home/home.component";
-import {Baimoitao30Component} from "./baimoitao30/baimoitao30.component";
-import {Top30Component} from "./top30/top30.component";
+import {EditSongComponent} from './crudSong/edit-song/edit-song.component';
+import {DeleteSongComponent} from './crudSong/delete-song/delete-song.component';
+import {DetailSongComponent} from './crudSong/detail-song/detail-song.component';
 
 const routes: Routes = [
   {
@@ -17,11 +21,33 @@ const routes: Routes = [
   {
     path: 'top30',
     component: Top30Component
+  },
+  {
+    path: 'personal',
+    component: ListSongComponent,
+  },
+  {
+    path: 'create',
+    component: CreateSongComponent
+  },
+  {
+    path: 'edit/:id',
+    component: EditSongComponent
+  },
+  {
+    path: 'delete/:id',
+    component: DeleteSongComponent
+  },
+  {
+  path: 'detail/:id',
+  component: DetailSongComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

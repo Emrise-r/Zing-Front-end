@@ -22,7 +22,7 @@ export class NghenhieunhatComponent implements OnInit {
       for (let i = 0; i < 6; i++) {
         this.songList6.push(p[i]);
       }
-    })
+    });
     return this.songList6;
   }
 

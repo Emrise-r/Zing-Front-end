@@ -22,7 +22,9 @@ export class CreateSongComponent implements OnInit {
     this.songForm = this.formBuilder.group({
       name: new FormControl(),
       artist: new FormControl(),
-      description: new FormControl()
+      description: new FormControl(),
+      genre: new FormControl(),
+      cover_art_url: new FormControl()
     });
   }
   createSong(): void{

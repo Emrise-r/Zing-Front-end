@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ISong} from "../isong";
-import {ISongService} from "../isong.service";
+import {ISong} from '../isong';
+import {ISongService} from '../isong.service';
 
 @Component({
   selector: 'app-likenhieunhat10bai',
@@ -8,8 +8,8 @@ import {ISongService} from "../isong.service";
   styleUrls: ['./likenhieunhat10bai.component.scss']
 })
 export class Likenhieunhat10baiComponent implements OnInit {
-  songListLike6: ISong[] = []
-  songListLike30: ISong[] = []
+  songListLike6: ISong[] = [];
+  songListLike30: ISong[] = [];
 
   constructor(private iSongService: ISongService) {
   }
@@ -23,7 +23,7 @@ export class Likenhieunhat10baiComponent implements OnInit {
       for (let i = 0; i < 6; i++) {
         this.songListLike6.push(p[i]);
       }
-    })
+    });
     return this.songListLike6;
   }
 
@@ -32,7 +32,7 @@ export class Likenhieunhat10baiComponent implements OnInit {
       for (let i = 0; i < 30; i++) {
         this.songListLike30.push(p[i]);
       }
-    })
+    });
     return this.songListLike30;
   }
 }

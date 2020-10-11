@@ -17,7 +17,7 @@ export class ListSongComponent implements OnInit {
   ngOnInit(): void {
   }
   getListSongs(): ISong[] {
-    this.iSongService.getAllSongByDate().subscribe(p => this.songs = p);
+    this.iSongService.getAllSongByUser().subscribe(p => this.songs = p);
     return this.songs;
   }
 }

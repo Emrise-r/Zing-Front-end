@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ISong} from "../isong";
-import {ISongService} from "../isong.service";
+import {ISong} from '../isong';
+import {ISongService} from '../isong.service';
 
 @Component({
   selector: 'app-top30',
@@ -19,7 +19,7 @@ songList30: ISong[] = [];
       for (let i = 0; i < 30; i++) {
         this.songList30.push(p[i]);
       }
-    })
+    });
     return this.songList30;
   }
 }

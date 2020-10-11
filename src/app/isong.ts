@@ -2,11 +2,11 @@ export interface ISong {
   songId?: number;
   name?: string;
   description?: string;
-  img?: string;
+  cover_art_url?: string;
   artist?: string;
   date?: Date;
   genre?: string;
   plays?: number;
-  likes?:number;
+  likes?: number;
   user?: number;
 }
