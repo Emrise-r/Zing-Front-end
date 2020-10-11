@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ISongService} from '../../isong.service';
+
 import {ActivatedRoute, Router} from '@angular/router';
-import {ISong} from '../../isong';
+import {ISong} from '../../interface/isong';
+import {ISongService} from '../../service/isong.service';
+
 
 @Component({
   selector: 'app-delete-song',

@@ -1,7 +1,11 @@
 import {Injectable} from '@angular/core';
+
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ISong} from './isong';
+import {ISong} from '../interface/isong';
+
+
+
 
 const API_URL = 'http://localhost:8080/song';
 
@@ -10,9 +14,9 @@ const API_URL = 'http://localhost:8080/song';
 })
 export class ISongService {
 
+
   constructor(private http: HttpClient) {
   }
-
 
   getAllSongByPlay(): Observable<ISong[]> {
     return this.http.get<ISong[]>(API_URL + `/plays/desc`);

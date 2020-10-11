@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ISong} from '../../isong';
-import {ISongService} from '../../isong.service';
+
 import {ActivatedRoute} from '@angular/router';
+import {ISong} from '../../interface/isong';
+import {ISongService} from '../../service/isong.service';
 
 @Component({
   selector: 'app-detail-song',

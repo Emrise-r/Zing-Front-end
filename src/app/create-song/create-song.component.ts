@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {ISong} from '../interface/isong';
 
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Iuser} from '../interface/iuser';
+import {ISongService} from '../service/isong.service';
 import {Observable} from 'rxjs';
-import {Iuser} from '../../interface/iuser';
-import {ISong} from '../../interface/isong';
-import {ISongService} from '../../service/isong.service';
 
 @Component({
   selector: 'app-create-song',
@@ -14,26 +14,28 @@ import {ISongService} from '../../service/isong.service';
   styleUrls: ['./create-song.component.scss']
 })
 export class CreateSongComponent implements OnInit {
+
   user: Iuser = {
-    userId: 2,
-  };
+    userId: 5,
+}
   song: ISong = {
     song_url: ''
   };
-  uploadProgress$: Observable<number>;
+
+  uploadProgress$: Observable<number>
+
   process$: number;
   songForm: FormGroup;
   songFileSelected: File = null;
   checkSongFile: boolean;
-  checkUploadedFile = true;
+  checkUploadedFile: boolean = true;
   message: string;
 
   constructor(
     private storage: AngularFireStorage,
     private fb: FormBuilder,
     private service: ISongService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.songForm = this.fb.group({
@@ -41,23 +43,22 @@ export class CreateSongComponent implements OnInit {
       artist: ['', [Validators.required]],
       genre: [''],
       description: ['']
-    });
+    })
   }
 
-  checkFile(event): void {
-    if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files[0].name.split('.').slice(1, 2));
-      if (event.target.files[0].name.split('.').slice(1, 2) == 'mp3') {
-        this.songFileSelected = event.target.files[0];
-        this.getSongUrl();
-        this.checkSongFile = false;
-      } else {
-        this.checkSongFile = true;
+  checkFile(event) {
+      if (event.target.files && event.target.files[0]) {
+        console.log(event.target.files[0].name.split('.').slice(1,2))
+        if (event.target.files[0].name.split('.').slice(1,2) == "mp3") {
+          this.songFileSelected = event.target.files[0];
+          this.getSongUrl();
+          this.checkSongFile = false;
+        } else {
+          this.checkSongFile = true;
+        }
       }
-    }
   }
-
-  submit() {
+  submit(){
     this.checkSongFile = false;
     this.song.name = this.songForm.value.name;
     this.song.artist = this.songForm.value.artist;
@@ -65,14 +66,14 @@ export class CreateSongComponent implements OnInit {
     this.song.description = this.songForm.value.description;
     this.song.date = new Date();
     this.song.user = this.user;
-    console.log(this.song);
-    this.service.createSong(this.song).subscribe(next => {
-      console.log(next);
-    });
+    console.log(this.song)
+    this.service.createSong(this.song).subscribe(next => {console.log(next)})
   }
 
+
+
   getSongUrl() {
-    const asName = this.songFileSelected.name.split('.').slice(0, 1);
+    const asName = this.songFileSelected.name.split('.').slice(0,1)
     const file = this.songFileSelected;
     const filePath = `Audio/${asName}`;
     const fileRef = this.storage.ref(filePath);
@@ -82,10 +83,9 @@ export class CreateSongComponent implements OnInit {
       console.log(this.process$);
       if (this.process$ == 100) {
         this.checkUploadedFile = false;
+
       };
-    }, error => {
-      console.log(error);
-    });
+    }, error => {console.log(error);});
     // this.uploadProgress$ = task.percentageChanges();
     task.snapshotChanges().pipe(
       finalize(() => {
@@ -99,22 +99,23 @@ export class CreateSongComponent implements OnInit {
         });
       })
     ).subscribe(url => {
-      if (url) {
-        console.log(url);
-      }
-    });
+        if (url) {
+          console.log(url);
+        }
+      });
+
   }
 
   get name() {
-    return this.songForm.get('name');
+    return this.songForm.get('name')
   }
 
   get songFile() {
-    return this.songForm.get('songFile');
+    return this.songForm.get('songFile')
   }
 
   get artist() {
-    return this.songForm.get('artist');
+    return this.songForm.get('artist')
   }
 
   checkform(): boolean {
@@ -122,4 +123,5 @@ export class CreateSongComponent implements OnInit {
       return true;
     }
   }
+
 }

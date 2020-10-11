@@ -12,12 +12,15 @@ import { Baimoitao30Component } from './baimoitao30/baimoitao30.component';
 import { HomeComponent } from './home/home.component';
 import { Top30Component } from './top30/top30.component';
 import { TopLikeComponent } from './top-like/top-like.component';
+import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CreateSongComponent } from './crudSong/create-song/create-song.component';
 import { DeleteSongComponent } from './crudSong/delete-song/delete-song.component';
 import { EditSongComponent } from './crudSong/edit-song/edit-song.component';
 import { ListSongComponent } from './crudSong/list-song/list-song.component';
 import { DetailSongComponent } from './crudSong/detail-song/detail-song.component';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireModule} from '@angular/fire';
 
 
 
@@ -39,13 +42,15 @@ import { DetailSongComponent } from './crudSong/detail-song/detail-song.componen
 
 
   ],
-    imports: [
-        HttpClientModule,
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        FormsModule
-    ],
+  imports: [
+    FormsModule,
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

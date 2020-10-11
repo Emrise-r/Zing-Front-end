@@ -5,9 +5,12 @@ import {Top30Component} from './top30/top30.component';
 import {ListSongComponent} from './crudSong/list-song/list-song.component';
 import {CreateSongComponent} from './crudSong/create-song/create-song.component';
 import {NgModule} from '@angular/core';
+
 import {EditSongComponent} from './crudSong/edit-song/edit-song.component';
 import {DeleteSongComponent} from './crudSong/delete-song/delete-song.component';
 import {DetailSongComponent} from './crudSong/detail-song/detail-song.component';
+
+
 
 const routes: Routes = [
   {
@@ -23,6 +26,7 @@ const routes: Routes = [
     component: Top30Component
   },
   {
+
     path: 'personal',
     component: ListSongComponent,
   },
@@ -39,8 +43,12 @@ const routes: Routes = [
     component: DeleteSongComponent
   },
   {
-  path: 'detail/:id',
-  component: DetailSongComponent
+    path: 'detail/:id',
+    component: DetailSongComponent
+  },
+  {
+    path: 'create',
+    component: CreateSongComponent
   }
 ];
 

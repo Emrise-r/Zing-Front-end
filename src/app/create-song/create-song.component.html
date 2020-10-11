@@ -1,9 +1,7 @@
-
-
 <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/breadcumb.jpg);">
   <div class="bradcumbContent">
     <p>See what's </p>
-    <h2>YOUR SONG</h2>
+    <h2>NEW SONG</h2>
   </div>
 </section>
 <br>
@@ -29,14 +27,17 @@
         </div>
       </div>
     </div>
+
     <div class="form-group">
       <label>Genre</label>
       <input type="text" class="form-control" formControlName="genre"  placeholder="genre">
     </div>
+
     <div class="form-group">
       <label for="exampleInputEmail1">Mô tả</label>
       <textarea class="form-control " formControlName="description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mô tả" rows="10" cols="5"></textarea>
     </div>
+
     <div>
       <label>Song</label>
       <input type="file" class="form-control" (change)="checkFile($event)"  placeholder="songFile">
@@ -54,7 +55,8 @@
       <p style="font-size:20px; margin-top: -15px">{{message}}</p>
     </div>
   </div>
-  <button  class="btn btn-success" [routerLink]="['/personal']" style="float:right">Thoat</button>
+  <button  class="btn btn-success" routerLink="" style="float:right">Thoat</button>
   <button type="submit" [disabled]="checkform()"  class="btn btn-primary" (click)="submit()" style="float:right; margin-right:1%">Submit</button>
 </form>
+
 <br><br>

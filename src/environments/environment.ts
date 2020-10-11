@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URL: 'http://localhost:8080',
+  firebaseConfig: {
+    apiKey: 'AIzaSyBj2WCY2XQf3aphcubA5nmh92JVokZj5oE',
+    authDomain: 'audio-d115d.firebaseapp.com',
+    databaseURL: 'https://audio-d115d.firebaseio.com',
+    projectId: 'audio-d115d',
+    storageBucket: 'audio-d115d.appspot.com',
+    messagingSenderId: '141811106039',
+    appId: '1:141811106039:web:d2a70f2fa2985049ffd3f2',
+    measurementId: 'G-RW0TRTY7BZ'
+  }
 };
 
 /*
