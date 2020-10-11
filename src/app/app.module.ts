@@ -24,6 +24,7 @@ import { ListSongComponent } from './crudSong/list-song/list-song.component';
 import { DetailSongComponent } from './crudSong/detail-song/detail-song.component';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
+import { SearchSongComponent } from './search-song/search-song.component';
 
 
 
@@ -45,6 +46,7 @@ import {AngularFireModule} from '@angular/fire';
     EditSongComponent,
     ListSongComponent,
     DetailSongComponent,
+    SearchSongComponent,
 
 
   ],

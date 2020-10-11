@@ -13,11 +13,7 @@ import {Iloginrequest} from "../interface/Iloginrequest";
 })
 export class LoginComponent implements OnInit {
   userForm: FormGroup;
-
-
   loginRequest: Iloginrequest = null;
-
-
   constructor(private formBuilder: FormBuilder,
               private userService: IUserService,
               private router: Router,

@@ -49,6 +49,9 @@ export class ISongService {
   getAllSongByUser(id: number): Observable<ISong[]>{
     return this.http.get<ISong[]>(API_URL + `/listByUid/${id}`);
   }
+  searchSongByName(name: string): Observable<ISong[]>{
+    return this.http.get<ISong[]>(API_URL + `/search/${name}`);
+  }
 }
 
 

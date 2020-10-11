@@ -63,6 +63,15 @@
         </nav>
       </div>
     </div>
+    <form class="form-inline my-5 my-lg-0" style="margin-left: 30%" >
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" #search
+            formControlName="search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0"
+              type="submit"><a
+        [href]="'http://localhost:4200/search/' + this.search.value">Search</a></button>
+
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchByName()">Search</button>-->
+    </form>
   </div>
 </header>
 <!--slideshow dau trang-->
