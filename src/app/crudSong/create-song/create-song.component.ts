@@ -8,6 +8,7 @@ import {Iuser} from '../../interface/iuser';
 import {ISong} from '../../interface/isong';
 import {ISongService} from '../../service/isong.service';
 import {Iloginrequest} from '../../interface/Iloginrequest';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-song',
@@ -33,7 +34,8 @@ export class CreateSongComponent implements OnInit {
   constructor(
     private storage: AngularFireStorage,
     private fb: FormBuilder,
-    private service: ISongService
+    private service: ISongService,
+    private router: Router
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     console.log(this.loginRequest.id);
@@ -71,9 +73,7 @@ export class CreateSongComponent implements OnInit {
     this.song.date = new Date();
     this.song.user = this.user;
     console.log(this.song);
-    this.service.createSong(this.song).subscribe(next => {
-      console.log(next);
-    });
+    this.service.createSong(this.song).subscribe(next => this.router.navigateByUrl('/personal'));
   }
 
   getSongUrl() {
