@@ -27,7 +27,7 @@ export class ISongService {
   }
 
   createSong(song: ISong): Observable<ISong> {
-    return this.http.post<ISong>(API_URL + "/songs", song)
+    return this.http.post<ISong>(API_URL + "/song/create", song)
   }
 
 }
