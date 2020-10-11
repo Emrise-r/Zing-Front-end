@@ -50,7 +50,8 @@ export class EditSongComponent implements OnInit {
       genre: [''],
       description: ['']
     });
-    this.checkSongUrl();
+    this.checkSongFile = false;
+    this.checkUploadedFile = false;
     this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) =>{
       this.song.songId = +paramMap.get('id');
     });
@@ -58,6 +59,7 @@ export class EditSongComponent implements OnInit {
   }
   checkFile(event): void {
     if (event.target.files && event.target.files[0]) {
+      this.checkUploadedFile = true;
       console.log(event.target.files[0].name.split('.').slice(1, 2));
       if (event.target.files[0].name.split('.').slice(1, 2) == 'mp3') {
         this.songFileSelected = event.target.files[0];
@@ -68,18 +70,18 @@ export class EditSongComponent implements OnInit {
       }
     }
   }
-  checkSongUrl(){
-    if (this.song.song_url){
-      this.checkSongFile = false;
-    }
-  }
+
 
   submit() {
-    this.checkSongFile = false;
-    this.song.name = this.songForm.value.name;
-    this.song.artist = this.songForm.value.artist;
-    this.song.genre = this.songForm.value.genre;
-    this.song.description = this.songForm.value.description;
+    // this.checkSongFile = false;
+    // this.song.name = this.songForm.value.name;
+    // this.song.artist = this.songForm.value.artist;
+    // this.song.genre = this.songForm.value.genre;
+    // this.song.description = this.songForm.value.description;
+    this.song = {
+      ...this.song,
+      ...this.songForm.value
+    }
     this.song.date = new Date();
     this.song.user = this.user;
     console.log(this.song);
@@ -96,12 +98,12 @@ export class EditSongComponent implements OnInit {
     task.percentageChanges().subscribe(next => {
       this.process$ = next;
       console.log(this.process$);
-      if (this.process$ == 100) {
-        this.checkUploadedFile = false;
-      };
+      // if (this.process$ == 100) {
+      //   this.checkUploadedFile = false;
+      // };
     }, error => {
       console.log(error);
-    });
+    },() => this.checkUploadedFile = false);
     // this.uploadProgress$ = task.percentageChanges();
     task.snapshotChanges().pipe(
       finalize(() => {
@@ -134,13 +136,15 @@ export class EditSongComponent implements OnInit {
   }
 
   checkform(): boolean {
-    if (this.songForm.invalid || this.song.song_url){}
     if (this.songForm.invalid || this.checkSongFile || this.checkUploadedFile) {
       return true;
     }
   }
   getSongById(id: number): void {
-    this.service.getSongByID(id).subscribe(pr => this.songForm.patchValue(pr));
+    this.service.getSongByID(id).subscribe(pr => {
+      this.song = pr;
+      this.songForm.patchValue(pr)
+    });
   }
 
   editSong(): void {

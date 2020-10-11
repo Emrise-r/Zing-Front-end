@@ -40,15 +40,12 @@ import { SearchSongComponent } from './search-song/search-song.component';
     TopLikeComponent,
     PlaymusicComponent,
     LoginComponent,
-
     CreateSongComponent,
     DeleteSongComponent,
     EditSongComponent,
     ListSongComponent,
     DetailSongComponent,
     SearchSongComponent,
-
-
   ],
   imports: [
     FormsModule,

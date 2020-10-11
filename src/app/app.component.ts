@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {IUserService} from "./service/iuser.service";
 import {Router} from "@angular/router";
@@ -10,22 +10,24 @@ import {ISong} from './interface/isong';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'Zing-Front-End';
   loginRequest: Iloginrequest;
-  // songForm: FormGroup;
-  constructor(private formBuilder: FormBuilder,
-              private router: Router
-              ) {
-
-  }
-
-  ngOnInit(): void {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
-    // this.songForm = this.formBuilder.group({
-    //   search: new FormControl()
-    // })
   }
+
+  // ngOnInit(): void {
+  //   this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+  // }
+
+  onChanges() {
+    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+  }
+
   logOut(): void {
     sessionStorage.removeItem("user")
   }
