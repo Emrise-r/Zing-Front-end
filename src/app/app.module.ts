@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { LoginComponent } from './login/login.component';
     TopLikeComponent,
     PlaymusicComponent,
     LoginComponent,
+
 
 
   ],

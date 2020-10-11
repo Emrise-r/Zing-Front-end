@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {IUserService} from "../iuser.service";
+import {IUserService} from "../service/iuser.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {LoginRequest} from "../loginrequest";
+import {Iloginrequest} from "../interface/Iloginrequest";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   userForm: FormGroup;
 
 
-  loginRequest: LoginRequest = null;
+  loginRequest: Iloginrequest = null;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -30,24 +30,18 @@ export class LoginComponent implements OnInit {
       password: new FormControl(),
     })
   }
-
   findUser(): void {
     const login = this.userForm.value;
 
     this.userService.getLoginRequest(login).subscribe(next => {
-      this.loginRequest = next;
-    },error => {console.log(error)},
+        this.loginRequest = next;
+      }, error => {
+        alert("ban chua co tai khoan hoac thong tin dang nhap sai")
+      },
       () => {
-      console.log("1");
-        console.log(this.loginRequest);
-        console.log("2");
         sessionStorage.setItem("user", JSON.stringify(this.loginRequest))
         this.loginRequest = JSON.parse((sessionStorage.getItem("user")))
-        this.router.navigate(['']);
-        console.log(this.loginRequest)
       }
-      );
-
-
+    );
   }
 }

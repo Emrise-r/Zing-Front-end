@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ISong} from "./isong";
+import {ISong} from "../interface/isong";
 
 const API_URL = 'http://localhost:8080/song'
 

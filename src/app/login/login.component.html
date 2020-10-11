@@ -1,4 +1,3 @@
-
 <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/breadcumb3.jpg);">
   <div class="bradcumbContent">
     <p>See what’s new</p>
@@ -13,17 +12,21 @@
           <h3>Welcome Back</h3>
           <!-- Login Form -->
           <div class="login-form">
-            <form [formGroup]="userForm" >
+            <form [formGroup]="userForm">
               <div class="form-group">
                 <label for="exampleInputUserName">User Name</label>
-                <input type="userName" class="form-control" id="exampleInputUserName" placeholder="Enter User Name" formControlName="name">
-<!--                <small id="emailHelp" class="form-text text-muted"><i class="fa fa-lock mr-2"></i>We'll never share your email with anyone else.</small>-->
+                <input type="userName" class="form-control" id="exampleInputUserName" placeholder="Enter User Name"
+                       formControlName="name">
+                <!--                <small id="emailHelp" class="form-text text-muted"><i class="fa fa-lock mr-2"></i>We'll never share your email with anyone else.</small>-->
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                       formControlName="password">
               </div>
-              <button type="submit" (click)="findUser()" class="btn oneMusic-btn mt-30">Login</button>
+              <button type="submit" (click)="findUser()" class="btn oneMusic-btn mt-30"><a
+                [href]="'http://localhost:4200'">Login</a></button>
+
             </form>
           </div>
         </div>
