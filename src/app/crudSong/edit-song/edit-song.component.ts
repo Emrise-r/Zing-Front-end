@@ -30,7 +30,7 @@ export class EditSongComponent implements OnInit {
   checkSongFile: boolean;
   checkUploadedFile = true;
   message: string;
-  sub:  Subscription;
+  sub: Subscription;
   loginRequest: Iloginrequest;
   constructor(private storage: AngularFireStorage,
               private fb: FormBuilder,
@@ -38,7 +38,7 @@ export class EditSongComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private router: Router
   ) {
-    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+    this.loginRequest = JSON.parse((sessionStorage.getItem('user')));
     console.log(this.loginRequest.id);
     this.user.userId = this.loginRequest.id;
   }
@@ -47,6 +47,7 @@ export class EditSongComponent implements OnInit {
     this.songForm = this.fb.group({
       name: ['', [Validators.required]],
       artist: ['', [Validators.required]],
+
       genre: [''],
       description: ['']
     });
