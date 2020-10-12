@@ -84,7 +84,6 @@ const routes: Routes = [
       component: PlaymusicComponent
     }]
   },
-
 ];
 
 @NgModule({

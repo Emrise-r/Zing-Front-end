@@ -23,13 +23,15 @@ export class CreateSongComponent implements OnInit {
     song_url: ''
   };
   loginRequest: Iloginrequest = null;
-  uploadProgress$: Observable<number>;
   process$: number;
   songForm: FormGroup;
   songFileSelected: File = null;
-  checkSongFile: boolean;
+  coverArtFileSelected: File = null;
+  checkedSongFile: boolean;
   checkUploadedFile = true;
+  checkedCoverArtFile: boolean;
   message: string;
+  message2: string;
 
   constructor(
     private storage: AngularFireStorage,
@@ -51,30 +53,69 @@ export class CreateSongComponent implements OnInit {
     });
   }
 
+  checkCoverArtFile(event): void {
+    if (event.target.files && event.target.files[0]) {
+      this.checkedCoverArtFile = true;
+      console.log(event.target.files[0].size);
+      const imgName = event.target.files[0].name.split('.').slice(1, 2);
+      console.log(imgName);
+      if (imgName == 'png' || imgName == 'jpg' || imgName == 'gif') {
+        this.coverArtFileSelected = event.target.files[0];
+        this.getCoverArtUrl();
+        this.checkedCoverArtFile = false;
+      } else {
+        this.checkedCoverArtFile = true;
+      }
+    }
+  }
+
   checkFile(event): void {
     if (event.target.files && event.target.files[0]) {
       console.log(event.target.files[0].name.split('.').slice(1, 2));
       if (event.target.files[0].name.split('.').slice(1, 2) == 'mp3') {
         this.songFileSelected = event.target.files[0];
         this.getSongUrl();
-        this.checkSongFile = false;
+        this.checkedSongFile = false;
       } else {
-        this.checkSongFile = true;
+        this.checkedSongFile = true;
       }
     }
   }
 
   submit() {
-    this.checkSongFile = false;
-    this.song.name = this.songForm.value.name;
-    this.song.artist = this.songForm.value.artist;
-    this.song.genre = this.songForm.value.genre;
-    this.song.description = this.songForm.value.description;
+    this.song = {
+      ...this.song,
+      ...this.songForm.value
+    }
+    console.log(this.song);
     this.song.date = new Date();
     this.song.user = this.user;
     console.log(this.song);
     this.service.createSong(this.song).subscribe(next => this.router.navigateByUrl('/personal'));
   }
+
+  getCoverArtUrl() {
+      const asName = this.coverArtFileSelected.name.split('.').slice(0, 1);
+      const filePath = `CoverArt/${asName}`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, this.coverArtFileSelected);
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            if (url) {
+              this.song.cover_art_url = url;
+            }
+            console.log(this.song.cover_art_url);
+            this.message2 = 'upload completed';
+          });
+        })
+      ).subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
 
   getSongUrl() {
     const asName = this.songFileSelected.name.split('.').slice(0, 1);
@@ -85,13 +126,9 @@ export class CreateSongComponent implements OnInit {
     task.percentageChanges().subscribe(next => {
       this.process$ = next;
       console.log(this.process$);
-      if (this.process$ == 100) {
-        this.checkUploadedFile = false;
-      };
     }, error => {
       console.log(error);
-    });
-    // this.uploadProgress$ = task.percentageChanges();
+    }, () => this.checkUploadedFile = false);
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(url => {
@@ -100,7 +137,6 @@ export class CreateSongComponent implements OnInit {
           }
           console.log(this.song.song_url);
           this.message = 'upload completed';
-          // alert("upload completed, please click submit")
         });
       })
     ).subscribe(url => {
@@ -123,7 +159,7 @@ export class CreateSongComponent implements OnInit {
   }
 
   checkform(): boolean {
-    if (this.songForm.invalid || this.checkSongFile || this.checkUploadedFile) {
+    if (this.songForm.invalid || this.checkedSongFile || this.checkUploadedFile || this.checkedCoverArtFile) {
       return true;
     }
   }

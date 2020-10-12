@@ -12,37 +12,37 @@
 <form [formGroup]= "songForm" style="width: 80%; margin-left: 10%; margin-top:3%">
   <div class="form-group">
     <label>Song Name</label>
-    <input type="text" class="form-control" formControlName="name" placeholder="Song Name">
+    <input type="text" class="form-control" formControlName="name" placeholder="Enter name">
     <div *ngIf="name.invalid && (name.dirty || name.touched)"
          class="alert alert-danger">
       <div *ngIf="name.errors.required">
-        Song Name Not Emty
+        Song Name Not Empty
       </div>
     </div>
     <div class="form-group">
       <label>Artist</label>
-      <input type="text" class="form-control" formControlName="artist"  placeholder="artist">
+      <input type="text" class="form-control" formControlName="artist"  placeholder="Enter artist">
       <div *ngIf="artist.invalid && (artist.dirty || artist.touched)"
            class="alert alert-danger">
         <div *ngIf="artist.errors.required">
-          Artist Not Emty
+          Artist Not Empty
         </div>
       </div>
     </div>
     <div class="form-group">
       <label>Genre</label>
-      <input type="text" class="form-control" formControlName="genre"  placeholder="genre">
+      <input type="text" class="form-control" formControlName="genre"  placeholder="Enter genre">
     </div>
     <div class="form-group">
-      <label for="exampleInputEmail1">Mô tả</label>
-      <textarea class="form-control " formControlName="description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mô tả" rows="10" cols="5"></textarea>
+      <label for="exampleInputEmail1">Description</label>
+      <textarea class="form-control " formControlName="description" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter description" rows="10" cols="5"></textarea>
     </div>
     <div>
-      <label>Song</label>
+      <label>Choose Song</label>
       <input type="file" class="form-control" (change)="checkFile($event)"  placeholder="songFile">
       <br>
       <div *ngIf="checkSongFile" class="alert alert-danger">
-        Just Mp3 file only
+        Just mp3 file only
       </div>
     </div>
     <br>
@@ -54,7 +54,7 @@
       <p style="font-size:20px; margin-top: -15px">{{message}}</p>
     </div>
   </div>
-  <button  class="btn btn-success" [routerLink]="['/personal']" style="float:right">Thoat</button>
+  <button  class="btn btn-success" [routerLink]="['/personal']" style="float:right">Back to list</button>
   <button type="submit" [disabled]="checkform()"  class="btn btn-primary" (click)="submit()" style="float:right; margin-right:1%">Submit</button>
 </form>
 <br><br>

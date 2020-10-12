@@ -1,3 +1,4 @@
+
 <!--navbar-->
 <div class="preloader d-flex align-items-center justify-content-center">
   <div class="lds-ellipsis">
@@ -62,8 +63,11 @@
   </div>
 </nav>
 
+<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchByName()">Search</button>-->
 
-<router-outlet></router-outlet>
+<!--slideshow dau trang-->
+
+<router-outlet (activate)="onChanges()" ></router-outlet>
 
 <footer class="footer-area">
   <div class="container">
