@@ -31,7 +31,7 @@
             <!-- Nav Start -->
             <div class="classynav">
               <ul>
-                <li><a href="index.html">HOME</a></li>
+                <li><a [routerLink]="''">HOME</a></li>
                 <li><a>ALBUMS</a></li>
                 <li><a [routerLink]="'/top30'">TOP 30</a></li>
 <!--                <li><a [routerLink]="'/top30'">TOP LIKE</a></li>-->
@@ -43,7 +43,7 @@
               <div class="login-register-cart-button d-flex align-items-center">
                 <div class="login-register-btn mr-50">
                   <div *ngIf="loginRequest; else tmp">
-                    <span>hi: {{loginRequest.username}}</span> |
+                    <span style="color: white">hi: {{loginRequest.username}}</span> |
                     <span><a [href]="'http://localhost:4200'"(click)="logOut()">Log out</a></span> |
                     <span><a [routerLink]="'/personal'">PERSONAL MUSIC</a></span>
                     </div>
@@ -69,14 +69,12 @@
       <button class="btn btn-outline-success my-2 my-sm-0"
               type="submit"><a
         [href]="'http://localhost:4200/search/' + this.search.value">Search</a></button>
-
-<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchByName()">Search</button>-->
     </form>
   </div>
 </header>
-<!--slideshow dau trang-->
 
-<router-outlet (activate)="onChanges()" ></router-outlet>
+<router-outlet (activate)="onChanges()" (change)="onChanges()"></router-outlet>
+<app-playmusic [currentSong]="currentSong"></app-playmusic>
 
 <footer class="footer-area">
   <div class="container">

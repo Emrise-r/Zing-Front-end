@@ -1,6 +1,6 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {IUserService} from "../service/iuser.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Iloginrequest} from "../interface/Iloginrequest";
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("user", JSON.stringify(this.loginRequest))
         this.loginRequest = JSON.parse((sessionStorage.getItem("user")))
         console.log(this.loginRequest);
+
         if(this.loginRequest) {
           this.router.navigateByUrl('');
         }

@@ -17,26 +17,33 @@ import {Iloginrequest} from '../../interface/Iloginrequest';
   styleUrls: ['./edit-song.component.scss']
 })
 export class EditSongComponent implements OnInit {
+
   user: Iuser = {
     userId: 0,
   };
+
   song: ISong = {
     song_url: ''
   };
-  uploadProgress$: Observable<number>;
+
   process$: number;
   songForm: FormGroup;
   songFileSelected: File = null;
+  coverArtFileSelected: File = null;
   checkSongFile: boolean;
   checkUploadedFile = true;
+  checkedCoverArtFile: boolean;
   message: string;
+  message2: string;
   sub:  Subscription;
   loginRequest: Iloginrequest;
-  constructor(private storage: AngularFireStorage,
-              private fb: FormBuilder,
-              private service: ISongService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router
+
+  constructor(
+    private storage: AngularFireStorage,
+    private fb: FormBuilder,
+    private service: ISongService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     console.log(this.loginRequest.id);
@@ -57,27 +64,41 @@ export class EditSongComponent implements OnInit {
     });
     this.getSongById(this.song.songId);
   }
+
+  checkCoverArtFile(event): void {
+    if (event.target.files && event.target.files[0]) {
+      this.checkedCoverArtFile = true;
+      console.log(event.target.files[0].size);
+      const imgName = event.target.files[0].name.split('.').slice(1, 2);
+      console.log(imgName);
+      if (imgName == 'png' || imgName == 'jpeg' || imgName == 'gif' || imgName == 'jpg') {
+        this.coverArtFileSelected = event.target.files[0];
+        this.getCoverArtUrl();
+        this.checkedCoverArtFile = false;
+      } else {
+        this.checkedCoverArtFile = true;
+        this.message2 = null;
+      }
+    }
+  }
+
   checkFile(event): void {
     if (event.target.files && event.target.files[0]) {
       this.checkUploadedFile = true;
-      console.log(event.target.files[0].name.split('.').slice(1, 2));
-      if (event.target.files[0].name.split('.').slice(1, 2) == 'mp3') {
+      const fileName = event.target.files[0].name.split('.').slice(1, 2);
+      console.log(fileName);
+      if (fileName == 'mp3' || fileName == 'wav' || fileName == 'ogg') {
         this.songFileSelected = event.target.files[0];
         this.getSongUrl();
         this.checkSongFile = false;
       } else {
         this.checkSongFile = true;
+        this.message = null;
       }
     }
   }
 
-
   submit() {
-    // this.checkSongFile = false;
-    // this.song.name = this.songForm.value.name;
-    // this.song.artist = this.songForm.value.artist;
-    // this.song.genre = this.songForm.value.genre;
-    // this.song.description = this.songForm.value.description;
     this.song = {
       ...this.song,
       ...this.songForm.value
@@ -89,6 +110,28 @@ export class EditSongComponent implements OnInit {
     );
   }
 
+  getCoverArtUrl() {
+    const asName = this.coverArtFileSelected.name.split('.').slice(0, 1);
+    const filePath = `CoverArt/${asName}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, this.coverArtFileSelected);
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(url => {
+          if (url) {
+            this.song.cover_art_url = url;
+          }
+          console.log(this.song.cover_art_url);
+          this.message2 = 'upload completed';
+        });
+      })
+    ).subscribe(url => {
+      if (url) {
+        console.log(url);
+      }
+    });
+  }
+
   getSongUrl() {
     const asName = this.songFileSelected.name.split('.').slice(0, 1);
     const file = this.songFileSelected;
@@ -98,13 +141,9 @@ export class EditSongComponent implements OnInit {
     task.percentageChanges().subscribe(next => {
       this.process$ = next;
       console.log(this.process$);
-      // if (this.process$ == 100) {
-      //   this.checkUploadedFile = false;
-      // };
     }, error => {
       console.log(error);
     },() => this.checkUploadedFile = false);
-    // this.uploadProgress$ = task.percentageChanges();
     task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(url => {
@@ -136,7 +175,7 @@ export class EditSongComponent implements OnInit {
   }
 
   checkform(): boolean {
-    if (this.songForm.invalid || this.checkSongFile || this.checkUploadedFile) {
+    if (this.songForm.invalid || this.checkSongFile || this.checkUploadedFile || this.checkedCoverArtFile) {
       return true;
     }
   }

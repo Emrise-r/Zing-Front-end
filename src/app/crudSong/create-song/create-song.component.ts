@@ -59,25 +59,28 @@ export class CreateSongComponent implements OnInit {
       console.log(event.target.files[0].size);
       const imgName = event.target.files[0].name.split('.').slice(1, 2);
       console.log(imgName);
-      if (imgName == 'png' || imgName == 'jpg' || imgName == 'gif') {
+      if (imgName == 'png' || imgName == 'jpeg' || imgName == 'gif' || imgName == 'jpg') {
         this.coverArtFileSelected = event.target.files[0];
         this.getCoverArtUrl();
         this.checkedCoverArtFile = false;
       } else {
         this.checkedCoverArtFile = true;
+        this.message2 = null;
       }
     }
   }
 
   checkFile(event): void {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files[0].name.split('.').slice(1, 2));
-      if (event.target.files[0].name.split('.').slice(1, 2) == 'mp3') {
+      const fileName = event.target.files[0].name.split('.').slice(1, 2);
+      console.log(fileName);
+      if (fileName == 'mp3' || fileName == 'wav' || fileName == 'ogg') {
         this.songFileSelected = event.target.files[0];
         this.getSongUrl();
         this.checkedSongFile = false;
       } else {
         this.checkedSongFile = true;
+        this.message = null;
       }
     }
   }

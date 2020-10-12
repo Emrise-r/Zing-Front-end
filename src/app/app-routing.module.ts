@@ -13,6 +13,7 @@ import {DetailSongComponent} from './crudSong/detail-song/detail-song.component'
 import {PlaymusicComponent} from "./playmusic/playmusic.component";
 import {LoginComponent} from "./login/login.component";
 import {SearchSongComponent} from './search-song/search-song.component';
+import {PlayingComponent} from "./playing/playing.component";
 
 
 const routes: Routes = [
@@ -55,6 +56,14 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateSongComponent
+  },
+  {
+    path:'play/:songId',
+    component: PlaymusicComponent
+  },
+  {
+    path: 'playing/:songId',
+    component: PlayingComponent
   },
   {
     path: 'search/:name',
