@@ -1,4 +1,3 @@
-
 <!--navbar-->
 <div class="preloader d-flex align-items-center justify-content-center">
   <div class="lds-ellipsis">
@@ -8,92 +7,68 @@
     <div></div>
   </div>
 </div>
-<!--header-->
-<header class="header-area">
-  <!-- Navbar Area -->
-  <div class="oneMusic-main-menu">
-    <div class="classy-nav-container breakpoint-off">
-      <div class="container">
-        <!-- Menu -->
-        <nav class="classy-navbar justify-content-between" id="oneMusicNav">
-          <!-- Nav brand -->
-          <a href="index.html" class="nav-brand"><img src="assets/img/core-img/logo.png" alt=""></a>
-          <!-- Navbar Toggler -->
-          <div class="classy-navbar-toggler">
-            <span class="navbarToggler"><span></span><span></span><span></span></span>
-          </div>
-          <!-- Menu -->
-          <div class="classy-menu">
-            <!-- Close Button -->
-            <div class="classycloseIcon">
-              <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-            </div>
-            <!-- Nav Start -->
-            <div class="classynav">
-              <ul>
-                <li><a href="index.html">HOME</a></li>
-                <li><a>ALBUMS</a></li>
-                <li><a [routerLink]="'/top30'">TOP 30</a></li>
-<!--                <li><a [routerLink]="'/top30'">TOP LIKE</a></li>-->
-                <li><a [routerLink]="'/newSong30'">NEWS SONG</a></li>
-                <li><a [routerLink]="'/contact'">CONTACT</a></li>
-<!--                <li><a [routerLink]="'/personal'">PERSONAL MUSIC</a></li>-->
-              </ul>
-              <!--               Login/Register -->
-              <div class="login-register-cart-button d-flex align-items-center">
-                <div class="login-register-btn mr-50">
-                  <div *ngIf="loginRequest; else tmp">
-                    <span>hi: {{loginRequest.username}}</span> |
-                    <span><a [href]="'http://localhost:4200'"(click)="logOut()">Log out</a></span> |
-                    <span><a [routerLink]="'/personal'">PERSONAL MUSIC</a></span>
-                    </div>
-                </div>
-              </div>
-              <ng-template #tmp>
-                <div class="login-register-cart-button d-flex align-items-center">
-                  <!-- Login/Register -->
-                  <div class="login-register-btn mr-50">
-                    <a [routerLink]="'/login'" id="loginBtn">Login</a> | <a id="loginBtn1">Register</a>
-                  </div>
-                </div>
-              </ng-template>
-            </div>
-            <!-- Nav End -->
-          </div>
-        </nav>
-      </div>
-    </div>
-    <form class="form-inline my-5 my-lg-0" style="margin-left: 30%" >
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" #search
-            formControlName="search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0"
-              type="submit"><a
-        [href]="'http://localhost:4200/search/' + this.search.value">Search</a></button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+   <span><a href="index.html" class="nav-brand"><img src="assets/img/core-img/logo.png" alt=""
+                                                     style="width: 120px; height: 45px"></a></span>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="margin-left: 5%; width: 90%">
 
-<!--      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="searchByName()">Search</button>-->
-    </form>
+      <a class="nav-link" href="index.html" style="color:#062c33;font-size: 17px">HOME <span
+        class="sr-only">(current)</span></a>
+
+      <a class="nav-link" href="#" style="color: #062c33;font-size: 17px">PLAY LIST</a>
+
+      <a class="nav-link" [routerLink]="'/top30'" style="color: #062c33;font-size: 17px">TOP 100</a>
+
+      <a class="nav-link disabled" [routerLink]="'/newSong30'" tabindex="-1" aria-disabled="true"
+         style="color: #062c33;font-size: 17px">NEW SONGS</a>
+
+      <a class="nav-link disabled" [routerLink]="'/newSong30'" tabindex="-1" aria-disabled="true"
+         style="color: #062c33;font-size: 17px">SINGER</a>
+
+      <form class="form-inline my-2 my-lg-0" style="margin-left: 10%">
+        <input class="form-control mr-sm-2" type="search" name="search " formControlName="search"
+               placeholder="Search" aria-label="Search" style="background: #f4ffea" #search>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <a style="color: currentColor"
+             [href]="'http://localhost:4200/search/' + this.search.value">search</a>
+        </button>
+      </form>
+      <div style="margin-left: 20%" class="form-inline my-2 my-lg-0">
+        <div *ngIf="loginRequest; else tmp">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+              Hi: {{loginRequest.username}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" [routerLink]="'/personal'">Personal Music</a>
+              <a class="dropdown-item" href="#">My Playlist</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" [href]="'http://localhost:4200'" (click)="logOut()">Log Out</a>
+            </div>
+          </div>
+        </div>
+        <ng-template #tmp>
+          <a [routerLink]="'/login'" >Login</a> | <a>Register</a>
+        </ng-template>
+      </div>
+    </ul>
+
   </div>
-</header>
-<!--slideshow dau trang-->
+</nav>
+
 
 <router-outlet></router-outlet>
 
 <footer class="footer-area">
   <div class="container">
     <div class="row d-flex flex-wrap align-items-center">
-      <div class="col-12 col-md-6">
-        <a href="#"><img src="assets/img/core-img/logo.png" alt=""></a>
-        <p class="copywrite-text"><a href="">
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          Copyright &copy;<script>document.write(new Date().getFullYear());
-        </script>
-          All rights reserved | This template is made with
-          <i class="fa fa-heart-o" aria-hidden="true">
-          </i> by <a href="" target="_blank">Salvo</a>
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        </a>
-        </p>
-      </div>
+
       <div class="col-12 col-md-6">
         <div class="footer-nav">
           <p class="copywrite-text"><a href="">
