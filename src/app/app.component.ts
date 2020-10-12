@@ -31,8 +31,5 @@ export class AppComponent {
   logOut(): void {
     sessionStorage.removeItem("user")
   }
-  // searchByName(){
-  //   const name = this.songForm.value;
-  //   this.router.navigate(['/search', name])
-  // }
+
 }
