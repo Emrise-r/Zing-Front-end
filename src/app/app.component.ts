@@ -1,43 +1,54 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {IUserService} from "./service/iuser.service";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ActivatedRoute, Event, ParamMap, Router} from "@angular/router";
 import {Iloginrequest} from "./interface/Iloginrequest";
 import {ISong} from './interface/isong';
 import {CookieService} from "ngx-cookie-service";
+import {ShareEventService} from "./service/share-event.service";
+import {SongControllerService} from "./service/song-controller.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnChanges{
+  event: any;
+  playing: boolean = true;
 
   title = 'Zing-Front-End';
   loginRequest: Iloginrequest;
   currentSong: string;
 
   constructor(
-    private formBuilder: FormBuilder,
     private router: ActivatedRoute,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private shareEvent: ShareEventService,
+    private songController: SongControllerService
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+    shareEvent.changeEmitted$.subscribe(x => this.onChanges())
   }
 
   ngOnInit(): void {
-    this.router.paramMap.subscribe((paramMap: ParamMap) => {
-      paramMap.get('cookie')
-      this.onChanges();
-    })
+  }
+  onChanges() {
+      this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+      const newSong = this.cookie.get('current-song');
+      console.log(newSong);
+      if(this.currentSong != newSong) {
+        this.playing = false;
+        this.currentSong = newSong;
+        this.playing = true;
+        this.songController.emitChange(this.currentSong);
+      }
   }
 
-  onChanges() {
-    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
-    const newSong = this.cookie.get('current-song');
-    console.log(newSong);
-    if(this.currentSong != newSong) {
-      this.currentSong = newSong;
+  ngOnChanges(changes: SimpleChanges) {
+    if ('event' in changes) {
+      this.onChanges()
     }
   }
 

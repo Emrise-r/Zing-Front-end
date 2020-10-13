@@ -4,8 +4,8 @@
   <div class="col-12 col-sm-6 col-md-4 col-lg-2" *ngFor="let p of songListDate6">
     <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
       <div class="album-thumb">
-        <img src="{{p.cover_art_url}}" alt="">
-         <!-- Play Icon -->
+        <img *ngIf="p.cover_art_url" src="{{p.cover_art_url}}" alt="">
+<!--        <img #tmp src="assets/img/bg-img/a1.jpg" alt="">-->
         <div class="play-icon">
           <a [routerLink]="''" class="video--play--btn" (click)="playSong(p.songId, $event)"><span class="icon-play-button"></span></a>
         </div>
@@ -14,9 +14,8 @@
           <a [routerLink]="'/detail/' + p.songId">
           <h5>{{p.name}}</h5>
         </a>
-        <p>Radio Station</p>
+        <p>{{p.artist}}</p>
       </div>
     </div>
   </div>
 </div>
-

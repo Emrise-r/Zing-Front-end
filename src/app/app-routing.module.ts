@@ -58,11 +58,7 @@ const routes: Routes = [
     component: CreateSongComponent
   },
   {
-    path:'play/:songId',
-    component: PlaymusicComponent
-  },
-  {
-    path: 'playing/:songId',
+    path: 'playing',
     component: PlayingComponent
   },
   {
@@ -74,7 +70,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [{
       path: ':id',
-      component: PlaymusicComponent
+      component: PlayingComponent
     }]
   },
   {
@@ -82,7 +78,7 @@ const routes: Routes = [
     component: Baimoitao30Component,
     children: [{
       path: ':id',
-      component: PlaymusicComponent
+      component: PlayingComponent
     }]
   },
   {
@@ -90,7 +86,7 @@ const routes: Routes = [
     component: Top30Component,
     children: [{
       path: ':id',
-      component: PlaymusicComponent
+      component: PlayingComponent
     }]
   },
 ];
