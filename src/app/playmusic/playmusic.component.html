@@ -7,7 +7,7 @@
       <button (click)="stop()">stop</button>
       <div>
         <span style="color: #1abc9c">{{currentTime}}</span>
-        <input type="range" min="0" max="{{duration}}" value="0" [value]="seek" (input)="setSeek($event)">
+        <input type="range" min="0" max="{{audioFile.duration}}" value="0" [value]="seek" (input)="setSeek($event)">
         <span style="color: #1abc9c">{{duration}}</span>
       </div>
       <div>
