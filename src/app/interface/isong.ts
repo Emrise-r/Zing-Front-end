@@ -5,7 +5,7 @@ export interface ISong {
   name?: string;
   description?: string;
   cover_art_url?: string;
-  artist?: string;
+  artist?: any;
   genre?: string;
   date?: Date;
   plays?: number;

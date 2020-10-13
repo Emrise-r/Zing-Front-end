@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ISong} from '../interface/isong';
+import {IArtist} from '../interface/iartist';
 
 
 
@@ -51,6 +52,9 @@ export class ISongService {
   }
   searchSongByName(name: string): Observable<ISong[]>{
     return this.http.get<ISong[]>(API_URL + `/search/${name}`);
+  }
+  getAllArtist(): Observable<IArtist[]> {
+    return this.http.get<IArtist[]>(API_URL + `/allArtist`)
   }
 }
 

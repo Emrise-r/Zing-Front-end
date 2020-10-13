@@ -9,6 +9,7 @@ import {ISong} from '../../interface/isong';
 import {ISongService} from '../../service/isong.service';
 import {Iloginrequest} from '../../interface/Iloginrequest';
 import {Router} from '@angular/router';
+import {IArtist} from '../../interface/iartist';
 
 @Component({
   selector: 'app-create-song',
@@ -22,6 +23,8 @@ export class CreateSongComponent implements OnInit {
   song: ISong = {
     song_url: ''
   };
+  artists: IArtist[] = [];
+
   loginRequest: Iloginrequest = null;
   process$: number;
   songForm: FormGroup;
@@ -42,15 +45,17 @@ export class CreateSongComponent implements OnInit {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     console.log(this.loginRequest.id);
     this.user.userId = this.loginRequest.id;
+
   }
 
   ngOnInit(): void {
     this.songForm = this.fb.group({
       name: ['', [Validators.required]],
-      artist: ['', [Validators.required]],
+      artist: [''],
       genre: [''],
       description: ['']
     });
+    this.getAllArtist();
   }
 
   checkCoverArtFile(event): void {
@@ -156,6 +161,11 @@ export class CreateSongComponent implements OnInit {
 
   get artist() {
     return this.songForm.get('artist');
+  }
+
+  getAllArtist(){
+    this.service.getAllArtist().subscribe(p => this.artists = p);
+    return this.artists;
   }
 
   checkform(): boolean {

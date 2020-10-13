@@ -252,7 +252,7 @@ return t=a?function(t){return t&&a(r(t))}:function(t){return t&&r(t)}}function e
             var hours = Math.floor(secs / 3600),
                 minutes = Math.floor(secs % 3600 / 60),
                 seconds = Math.ceil(secs % 3600 % 60);
-            return (hours == 0 ? '' : hours > 0 && hours.toString().length < 2 ? '0' + hours + ':' : hours + ':') + (minutes.toString().length < 2 ? '0' + minutes : minutes) + ':' + (seconds.toString().length < 2 ? '0' + seconds : seconds);
+            return (hours === 0 ? '' : hours > 0 && hours.toString().length < 2 ? '0' + hours + ':' : hours + ':') + (minutes.toString().length < 2 ? '0' + minutes : minutes) + ':' + (seconds.toString().length < 2 ? '0' + seconds : seconds);
         },
         canPlayType = function(file) {
             var audioElement = document.createElement('audio');
@@ -347,7 +347,7 @@ return t=a?function(t){return t&&a(r(t))}:function(t){return t&&r(t)}}function e
 
                 var volumeTestDefault = theAudio.volume,
                     volumeTestValue = theAudio.volume = 0.111;
-                if (Math.round(theAudio.volume * 1000) / 1000 == volumeTestValue) theAudio.volume = volumeTestDefault;
+                if (Math.round(theAudio.volume * 1000) / 1000 === volumeTestValue) theAudio.volume = volumeTestDefault;
                 else thePlayer.addClass(cssClass.noVolume);
 
                 timeDuration.html('&hellip;');
