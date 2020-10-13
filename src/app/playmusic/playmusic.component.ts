@@ -96,6 +96,8 @@ export class PlaymusicComponent implements OnInit {
   streamSong(song: ISong) {
     return new Observable(observable => {
       this.audioFile.src = this.song.song_url;
+      this.songName = this.song.name;
+      this.artist = this.song.artist;
       this.audioFile.load();
       this.audioFile.play().finally(() => console.log('end'));
 
@@ -103,8 +105,7 @@ export class PlaymusicComponent implements OnInit {
           this.seek = this.audioFile.currentTime;
           this.currentTime = this.timeFormat(this.audioFile.currentTime);
           this.duration = this.timeFormat(this.audioFile.duration);
-          this.songName = this.song.name;
-          this.artist = this.song.artist;
+
       }
 
       this.addEvent(this.audioFile, this.audioEvent, handler);
