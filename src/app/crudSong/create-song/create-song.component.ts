@@ -59,6 +59,7 @@ export class CreateSongComponent implements OnInit {
   ngOnInit(): void {
     this.songForm = this.fb.group({
       name: ['', [Validators.required]],
+      artist: [''],
       genre: [''],
       description: ['']
     });
@@ -167,9 +168,9 @@ export class CreateSongComponent implements OnInit {
     return this.songForm.get('songFile');
   }
 
-  // get artist() {
-  //   return this.songForm.get('artist');
-  // }
+  get artist() {
+    return this.songForm.get('artist');
+  }
 
   getAllArtist() {
     this.service.getAllArtist().subscribe(p => {

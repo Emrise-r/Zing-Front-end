@@ -9,6 +9,8 @@ import {IArtist} from '../interface/iartist';
 
 
 const API_URL = 'http://localhost:8080/song';
+const API_URL2 = 'http://localhost:8080/artist';
+
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +58,22 @@ export class ISongService {
   getAllArtist(): Observable<IArtist[]> {
     return this.http.get<IArtist[]>(API_URL + `/allArtist`)
   }
+  getArtistAllSong(id: number): Observable<ISong[]>{
+    return this.http.get<ISong[]>(API_URL + `/listByArtist/${id}`);
+  }
+
+  createArtist(artist: IArtist): Observable<IArtist>{
+    return this.http.post<IArtist>(API_URL2 + `/create-artist`, artist);
+  }
+  // deleteArtist(id: number): Observable<IArtist>{
+  //   return this.http.delete<IArtist>(API_URL2 + `/delete-artist/${id}`);
+  // }
+  // getArtistByID(id: number): Observable<IArtist> {
+  //   return this.http.get<IArtist>(API_URL2 + `/${id}`)
+  // }
 }
+
+
 
 
 
