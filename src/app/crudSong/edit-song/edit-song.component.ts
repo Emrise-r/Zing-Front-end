@@ -9,6 +9,7 @@ import {Observable, Subscription} from 'rxjs';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Iloginrequest} from '../../interface/Iloginrequest';
+import {IArtist} from '../../interface/iartist';
 
 
 @Component({
@@ -26,6 +27,10 @@ export class EditSongComponent implements OnInit {
     song_url: ''
   };
 
+  artist: IArtist
+
+  artists: IArtist[] = [];
+  selectedArtist: IArtist;
   process$: number;
   songForm: FormGroup;
   songFileSelected: File = null;
@@ -53,7 +58,7 @@ export class EditSongComponent implements OnInit {
   ngOnInit(): void {
     this.songForm = this.fb.group({
       name: ['', [Validators.required]],
-      artist: ['', [Validators.required]],
+      // artist: ['', [Validators.required]],
       genre: [''],
       description: ['']
     });
@@ -63,6 +68,7 @@ export class EditSongComponent implements OnInit {
       this.song.songId = +paramMap.get('id');
     });
     this.getSongById(this.song.songId);
+    this.getAllArtist();
   }
 
   checkCoverArtFile(event): void {
@@ -170,10 +176,6 @@ export class EditSongComponent implements OnInit {
     return this.songForm.get('songFile');
   }
 
-  get artist() {
-    return this.songForm.get('artist');
-  }
-
   checkform(): boolean {
     if (this.songForm.invalid || this.checkSongFile || this.checkUploadedFile || this.checkedCoverArtFile) {
       return true;
@@ -191,5 +193,25 @@ export class EditSongComponent implements OnInit {
     this.service.updateSong(this.song.songId, song).subscribe(() => {
       this.router.navigate(['song']);
     });
+  }
+
+  getAllArtist() {
+    this.service.getAllArtist().subscribe(p => {
+      this.artists = p;
+    }, error => {
+    }, () => {
+      console.log(this.artists);
+      this.artists.forEach(value => {
+        console.log(value.name)
+        if (value.name == 'Unknown Artist') {
+          this.selectedArtist = value;
+        }})
+      console.log(this.selectedArtist);
+      return this.artists;
+    });
+  }
+
+  getArtist(id) {
+    this.song.artist.id = parseInt(id);
   }
 }

@@ -17,14 +17,22 @@ import {IArtist} from '../../interface/iartist';
   styleUrls: ['./create-song.component.scss']
 })
 export class CreateSongComponent implements OnInit {
+
   user: Iuser = {
     userId:0
   }
+
   song: ISong = {
     song_url: ''
   };
+
   artists: IArtist[] = [];
 
+  artist: IArtist = {
+    id: 0
+  };
+
+  selectedArtist: IArtist
   loginRequest: Iloginrequest = null;
   process$: number;
   songForm: FormGroup;
@@ -51,7 +59,6 @@ export class CreateSongComponent implements OnInit {
   ngOnInit(): void {
     this.songForm = this.fb.group({
       name: ['', [Validators.required]],
-      artist: [''],
       genre: [''],
       description: ['']
     });
@@ -95,6 +102,7 @@ export class CreateSongComponent implements OnInit {
     console.log(this.song);
     this.song.date = new Date();
     this.song.user = this.user;
+    this.song.artist = this.selectedArtist;
     console.log(this.song);
     this.service.createSong(this.song).subscribe(next => this.router.navigateByUrl('/personal'));
   }
@@ -159,13 +167,24 @@ export class CreateSongComponent implements OnInit {
     return this.songForm.get('songFile');
   }
 
-  get artist() {
-    return this.songForm.get('artist');
-  }
+  // get artist() {
+  //   return this.songForm.get('artist');
+  // }
 
-  getAllArtist(){
-    this.service.getAllArtist().subscribe(p => this.artists = p);
-    return this.artists;
+  getAllArtist() {
+    this.service.getAllArtist().subscribe(p => {
+      this.artists = p;
+    }, error => {
+    }, () => {
+      console.log(this.artists);
+      this.artists.forEach(value => {
+        console.log(value.name)
+        if (value.name == 'Unknown Artist') {
+          this.selectedArtist = value;
+        }})
+      console.log(this.selectedArtist);
+      return this.artists;
+    });
   }
 
   checkform(): boolean {
@@ -173,4 +192,15 @@ export class CreateSongComponent implements OnInit {
       return true;
     }
   }
+
+  getArtist(id) {
+    this.artist.id = parseInt(id);
+    this.selectedArtist = this.artist;
+  }
+
+  getEvent(event){
+    console.log('input');
+    console.log(event);
+  }
+
 }

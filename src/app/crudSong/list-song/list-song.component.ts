@@ -13,7 +13,8 @@ import {Iuser} from '../../interface/iuser';
 export class ListSongComponent implements OnInit {
   user: Iuser = {
     userId: 2
-  }
+  };
+
   loginRequest: Iloginrequest = null;
   songs: ISong[] = [];
   constructor( private iSongService: ISongService) {
@@ -26,6 +27,7 @@ export class ListSongComponent implements OnInit {
   getListSongs(): ISong[] {
     this.user.userId = this.loginRequest.id;
     this.iSongService.getAllSongByUser(this.user.userId).subscribe(p => this.songs = p);
+    console.log(this.songs);
     return this.songs;
   }
 }

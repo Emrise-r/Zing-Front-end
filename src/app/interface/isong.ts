@@ -1,11 +1,12 @@
 import {Iuser} from './iuser';
+import {IArtist} from './iartist';
 
 export interface ISong {
   songId?: number;
   name?: string;
   description?: string;
   cover_art_url?: string;
-  artist?: any;
+  artist?: IArtist;
   genre?: string;
   date?: Date;
   plays?: number;
