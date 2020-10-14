@@ -1,7 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ISong} from "../interface/isong";
 import {ISongService} from "../service/isong.service";
 import {ActivatedRoute} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
+import {SongControllerService} from "../service/song-controller.service";
+import {CookieService} from "ngx-cookie-service";
+import {Observable} from "rxjs";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-playmusic',
@@ -9,18 +14,134 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./playmusic.component.scss']
 })
 export class PlaymusicComponent implements OnInit {
-  song: ISong = null;
+  audioFile = new Audio();
+  song: ISong;
+  currentTime = "00:00";
+  duration = "00:00";
+  seek = 0;
+  songName = 'unknown_songName';
+  artist = 'unknown_artist'
+  playing = false;
+  audioEvent = [
+    'ended',
+    'error',
+    'play',
+    'playing',
+    'pause',
+    'timeupdate',
+    'canplay',
+    'loadedmetadata',
+    'loadstart'
+  ]
 
-  constructor(private iSongService: ISongService,
-              private activatedRoute: ActivatedRoute) {
+  currentSong = null;
+
+  constructor(
+    private iSongService: ISongService,
+    private songController: SongControllerService,
+    private cookie: CookieService
+  ) {
+    songController.changeEmitted$.subscribe(x => {
+      this.currentSong = cookie.get('current-song');
+      if( this.currentSong != null) {
+        this.onChanges();
+      }
+    });
   }
 
   ngOnInit(): void {
-    let id = (+this.activatedRoute.snapshot.params['id']);
-    this.getSongById(id)
+    if (this.currentSong != null){
+      this.onChanges();
+    }
+    console.log('init')
+  }
+
+  onChanges() {
+    this.getSongById(parseInt(this.currentSong));
+
   }
 
   getSongById(id: number): void {
-    this.iSongService.getSongByID(id).subscribe(p => this.song = p)
+    this.iSongService.getSongByID(id).subscribe(p => {
+      this.song = p;
+      console.log(this.song);
+    },error => console.log('err'),() => this.openFile(this.song))
+  }
+
+  getUrl(){
+    if (this.song.song_url) {
+    }
+  }
+
+  play(){
+    this.playing = !this.playing;
+    if(this.playing) {
+      this.audioFile.play().finally(() => console.log('end'));
+    } else {
+      this.pause();
+    }
+
+  }
+
+  pause(){
+    this.audioFile.pause();
+  }
+
+  stop() {
+    this.audioFile.pause();
+    this.audioFile.currentTime = 0;
+  }
+
+  openFile(song: ISong){
+    this.streamSong(song).subscribe();
+  }
+
+  setVolume(event) {
+    this.audioFile.volume = event.target.value;
+  }
+
+  streamSong(song: ISong) {
+    return new Observable(observable => {
+      this.audioFile.src = this.song.song_url;
+      this.songName = this.song.name;
+      this.artist = this.song.artist.name;
+      this.audioFile.load();
+      this.audioFile.play().finally(() => console.log('end'));
+
+      const handler = (event: Event) => {
+        this.seek = this.audioFile.currentTime;
+        this.currentTime = this.timeFormat(this.audioFile.currentTime);
+        this.duration = this.timeFormat(this.audioFile.duration);
+
+      }
+
+      this.addEvent(this.audioFile, this.audioEvent, handler);
+      return () => {
+        this.audioFile.pause();
+        this.audioFile.currentTime = 0;
+        this.removeEvent(this.audioFile, this.audioEvent, handler);
+      }
+    })
+  }
+
+  addEvent(audio, event, handler) {
+    event.forEach(event => {
+      audio.addEventListener(event, handler);
+    })
+  }
+
+  removeEvent(audio, event, handler) {
+    event.forEach(event => {
+      audio.removeEventListener(event, handler);
+    })
+  }
+
+  setSeek(event) {
+    this.audioFile.currentTime = event.target.value;
+  }
+
+  timeFormat (time, format="HH:mm:ss") {
+    const momentTime = time * 1000;
+    return moment.utc(momentTime).format(format);
   }
 }

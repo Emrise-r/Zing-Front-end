@@ -63,26 +63,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [{
-      path: ':id',
-      component: PlaymusicComponent
-    }]
   },
   {
     path: 'newSong30',
     component: Baimoitao30Component,
-    children: [{
-      path: ':id',
-      component: PlaymusicComponent
-    }]
   },
   {
     path: 'top30',
     component: Top30Component,
-    children: [{
-      path: ':id',
-      component: PlaymusicComponent
-    }]
   },
 ];
 

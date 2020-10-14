@@ -25,6 +25,7 @@ import { DetailSongComponent } from './crudSong/detail-song/detail-song.componen
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import { SearchSongComponent } from './search-song/search-song.component';
+import {CookieService} from 'ngx-cookie-service';
 
 
 
@@ -56,7 +57,7 @@ import { SearchSongComponent } from './search-song/search-song.component';
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

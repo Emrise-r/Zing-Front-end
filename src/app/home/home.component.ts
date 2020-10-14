@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CookieService} from "ngx-cookie-service";
+import {ShareEventService} from "../service/share-event.service";
 
 
 @Component({
@@ -8,9 +10,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  currentSong: String;
+
+  constructor(
+    private cookie: CookieService,
+    private shareEvent: ShareEventService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onChanges(){
+
+    this.shareEvent.emitChange('123');
   }
 
 }

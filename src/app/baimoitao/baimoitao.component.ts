@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {ISong} from '../interface/isong';
 import {ISongService} from '../service/isong.service';
+import {CookieService} from "ngx-cookie-service";
+import {ActivatedRoute} from "@angular/router";
+import {observable, Observable} from "rxjs";
 
 
 
@@ -15,8 +18,13 @@ import {ISongService} from '../service/isong.service';
 export class BaimoitaoComponent implements OnInit {
   songListDate6: ISong[] = [];
 
+  @Output()
+  changeSong = new EventEmitter<number>();
 
-  constructor(private iSongService: ISongService) {
+  constructor(
+    private iSongService: ISongService,
+    private cookie: CookieService,
+  ) {
   }
 
   ngOnInit(): void {
@@ -32,4 +40,9 @@ export class BaimoitaoComponent implements OnInit {
     return this.songListDate6;
   }
 
+  playSong(songId, event) {
+    this.cookie.set('current-song', `${songId}`,10000);
+    console.log(this.cookie.get('current-song'));
+    this.changeSong.emit();
+  }
 }

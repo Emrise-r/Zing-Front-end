@@ -84,7 +84,8 @@
 
 <!--slideshow dau trang-->
 
-<router-outlet (activate)="onChanges()" ></router-outlet>
+<router-outlet (activate)="onChanges()" (deactivate)='onChanges()'></router-outlet>
+<app-playmusic></app-playmusic>
 
 <footer class="footer-area">
   <div class="container">
