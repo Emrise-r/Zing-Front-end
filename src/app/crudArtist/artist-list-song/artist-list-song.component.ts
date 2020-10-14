@@ -14,20 +14,22 @@ export class ArtistListSongComponent implements OnInit {
   songs: ISong[] = [];
   artist: IArtist = {
     id: 0,
-    name: ''
+    name: ""
   };
 
   constructor(private iSongService: ISongService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
+    // const id = +this.activatedRoute.snapshot.paramMap.get('id');
+
   }
 
   ngOnInit(): void {
-    const id = +this.activatedRoute.snapshot.paramMap.get('id');
-    this.iSongService.getArtistAllSong(id);
+    this.getAllSongByArtist();
   }
 
   getAllSongByArtist() {
+    this.artist.id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.iSongService.getArtistAllSong(this.artist.id).subscribe(p => this.songs = p);
     return this.songs;
   }
