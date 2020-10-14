@@ -29,6 +29,7 @@ export class AppComponent implements OnInit, OnChanges{
     private songController: SongControllerService
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+    // console.log(this.loginRequest.roles[0])
     shareEvent.changeEmitted$.subscribe(x => this.onChanges())
   }
 

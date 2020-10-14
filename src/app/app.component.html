@@ -43,14 +43,13 @@
       <div style="margin-left: 20%" class="form-inline my-2 my-lg-0">
         <div *ngIf="loginRequest; else tmp">
           <div>
-          <div *ngIf="loginRequest.username == 'admin';else msp">
+          <div *ngIf="loginRequest != null && loginRequest.roles[0] == 'ROLE_ADMIN';else msp">
             <div class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                  aria-haspopup="true" aria-expanded="false">
                 Hi: {{loginRequest.username}}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" [routerLink]="'/personal'">Personal Music</a>
                 <a class="dropdown-item" href="#">My Playlist</a>
                 <a class="dropdown-item" [routerLink]="'/artist'">Artist Manage</a>
                 <div class="dropdown-divider"></div>

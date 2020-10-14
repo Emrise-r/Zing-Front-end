@@ -168,10 +168,6 @@ export class CreateSongComponent implements OnInit {
     return this.songForm.get('songFile');
   }
 
-  get artist() {
-    return this.songForm.get('artist');
-  }
-
   getAllArtist() {
     this.service.getAllArtist().subscribe(p => {
       this.artists = p;
