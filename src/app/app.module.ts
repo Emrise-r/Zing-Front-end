@@ -25,7 +25,9 @@ import { DetailSongComponent } from './crudSong/detail-song/detail-song.componen
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import { SearchSongComponent } from './search-song/search-song.component';
-
+import { ListArtistComponent } from './crudArtist/list-artist/list-artist.component';
+import { CreateArtistComponent } from './crudArtist/create-artist/create-artist.component';
+import { ArtistListSongComponent } from './crudArtist/artist-list-song/artist-list-song.component';
 
 
 @NgModule({
@@ -46,6 +48,10 @@ import { SearchSongComponent } from './search-song/search-song.component';
     ListSongComponent,
     DetailSongComponent,
     SearchSongComponent,
+    ListArtistComponent,
+    CreateArtistComponent,
+    ArtistListSongComponent,
+
   ],
   imports: [
     FormsModule,

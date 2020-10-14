@@ -13,6 +13,9 @@ import {DetailSongComponent} from './crudSong/detail-song/detail-song.component'
 import {PlaymusicComponent} from "./playmusic/playmusic.component";
 import {LoginComponent} from "./login/login.component";
 import {SearchSongComponent} from './search-song/search-song.component';
+import {ListArtistComponent} from './crudArtist/list-artist/list-artist.component';
+import {CreateArtistComponent} from './crudArtist/create-artist/create-artist.component';
+import {ArtistListSongComponent} from './crudArtist/artist-list-song/artist-list-song.component';
 
 
 const routes: Routes = [
@@ -59,6 +62,18 @@ const routes: Routes = [
   {
     path: 'search/:name',
     component: SearchSongComponent
+  },
+  {
+    path: 'artist',
+    component: ListArtistComponent
+  },
+  {
+    path: 'createArtist',
+    component: CreateArtistComponent
+  },
+  {
+    path: 'listByArtist/:id',
+    component: ArtistListSongComponent
   },
   {
     path: '',

@@ -92,10 +92,8 @@ export class CreateSongComponent implements OnInit {
       ...this.song,
       ...this.songForm.value
     }
-    console.log(this.song);
     this.song.date = new Date();
     this.song.user = this.user;
-    console.log(this.song);
     this.service.createSong(this.song).subscribe(next => this.router.navigateByUrl('/personal'));
   }
 

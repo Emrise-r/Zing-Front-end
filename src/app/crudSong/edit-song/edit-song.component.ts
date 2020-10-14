@@ -9,6 +9,7 @@ import {Observable, Subscription} from 'rxjs';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Iloginrequest} from '../../interface/Iloginrequest';
+import {IArtist} from '../../interface/iartist';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class EditSongComponent implements OnInit {
   song: ISong = {
     song_url: ''
   };
+  editartist: IArtist[] = [];
 
   process$: number;
   songForm: FormGroup;
@@ -63,6 +65,7 @@ export class EditSongComponent implements OnInit {
       this.song.songId = +paramMap.get('id');
     });
     this.getSongById(this.song.songId);
+    this.getAllArtist();
   }
 
   checkCoverArtFile(event): void {
@@ -191,5 +194,10 @@ export class EditSongComponent implements OnInit {
     this.service.updateSong(this.song.songId, song).subscribe(() => {
       this.router.navigate(['song']);
     });
+  }
+
+  getAllArtist(){
+    this.service.getAllArtist().subscribe(p => this.editartist = p);
+    return this.editartist;
   }
 }
