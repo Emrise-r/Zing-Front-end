@@ -18,7 +18,7 @@
   <tr *ngFor="let p of playLists; index as i" >
     <th scope="row">{{i+1}}</th>
     <td>{{p.name}}</td>
-    <td> <a>List Song</a></td>
+    <td> <a [routerLink]="'/songByPlaylist/' + p.id">List Song</a></td>
   </tr>
   </tbody>
 </table>

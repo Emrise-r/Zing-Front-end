@@ -3,7 +3,7 @@
 <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(assets/img/bg-img/breadcumb.jpg);">
   <div class="bradcumbContent">
     <p>See what's </p>
-    <h2>NEW SONG</h2>
+    <h2>List Song</h2>
   </div>
 </section>
 <br>
@@ -25,7 +25,17 @@
       <h6>{{p.name}}</h6>
     </a></td>
     <td>
-      <button  class="btn btn-danger" style="float:right" (click)="delete(p)">Delete</button>
+
+<!--      chinh sua play list-->
+      <div *ngIf="loginRequest.id === playlist.user.userId; else msp">
+        <button  class="btn btn-danger" style="float:right" (click)="delete(p)">Delete</button>
+      </div>
+
+
+      <ng-template #msp>
+
+      </ng-template>
+    </td>
   </tr>
   </tbody>
 </table>
