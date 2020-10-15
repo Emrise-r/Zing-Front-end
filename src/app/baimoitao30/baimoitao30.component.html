@@ -32,7 +32,7 @@
         <a class="dropdown-item" style="color:#000000" [routerLink]="'/createPlaylist'">New Playlist  +</a>
         <div class="dropdown-divider"  ></div>
         <div *ngFor="let pr of playList">
-          <a class="dropdown-item" style="color:#6c757d">{{pr.name}}</a>
+          <a class="dropdown-item" style="color:#6c757d" (click)="addPlaylistSong(p, pr)">{{pr.name}}</a>
         </div>
 
 

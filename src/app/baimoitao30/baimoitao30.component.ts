@@ -4,6 +4,8 @@ import {ISongService} from '../service/isong.service';
 import {IplaylistService} from '../service/iplaylist.service';
 import {IPlayList} from '../interface/i-play-list';
 import {Iloginrequest} from '../interface/Iloginrequest';
+import {IPlaylistSong} from '../interface/iplaylistsong';
+import {PlaylistSongService} from '../service/playlist-song.service';
 
 
 @Component({
@@ -13,11 +15,18 @@ import {Iloginrequest} from '../interface/Iloginrequest';
 })
 export class Baimoitao30Component implements OnInit {
 
+  playlistSong: IPlaylistSong = {
+    playlist: null,
+    song: null
+}
   songListDate30: ISong[] = [];
   playList: IPlayList[] = [];
   loginRequest: Iloginrequest = null;
-  constructor(private iSongService: ISongService,
-              private iPlaylistService: IplaylistService) {
+  constructor(
+    private iSongService: ISongService,
+    private iPlaylistService: IplaylistService,
+    private playlistSongService: PlaylistSongService
+  ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     this.getAllSong30();
   }
@@ -44,5 +53,15 @@ export class Baimoitao30Component implements OnInit {
       this.playList = pr
     })
     return this.playList
+  }
+
+  addPlaylistSong(song, playlist) {
+    console.log(playlist);
+    this.playlistSong.playlist = playlist;
+    this.playlistSong.song = song;
+    console.log(this.playlistSong);
+    this.playlistSongService.addPlaylistSong(this.playlistSong).subscribe(() =>
+      console.log('up')
+    );
   }
 }

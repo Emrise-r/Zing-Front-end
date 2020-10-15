@@ -4,6 +4,8 @@ import {ISongService} from '../service/isong.service';
 import {IPlayList} from '../interface/i-play-list';
 import {Iloginrequest} from '../interface/Iloginrequest';
 import {IplaylistService} from '../service/iplaylist.service';
+import {IPlaylistSong} from '../interface/iplaylistsong';
+import {PlaylistSongService} from '../service/playlist-song.service';
 
 
 @Component({
@@ -16,9 +18,16 @@ export class Top30Component implements OnInit {
   playList: IPlayList[] = [];
   loginRequest: Iloginrequest = null;
 
+  playlistSong: IPlaylistSong = {
+    playlist: null,
+    song: null
+  }
 
-  constructor(private iSongService: ISongService,
-              private iPlaylistService: IplaylistService) {
+  constructor(
+    private iSongService: ISongService,
+    private iPlaylistService: IplaylistService,
+    private playlistSongService: PlaylistSongService
+  ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem('user')));
   }
 
@@ -47,5 +56,15 @@ export class Top30Component implements OnInit {
       this.playList = pr;
     });
     return this.playList;
+  }
+
+  addPlaylistSong(song, playlist) {
+    console.log(playlist);
+    this.playlistSong.playlist = playlist;
+    this.playlistSong.song = song;
+    console.log(this.playlistSong);
+    this.playlistSongService.addPlaylistSong(this.playlistSong).subscribe(() =>
+      console.log('up')
+    );
   }
 }

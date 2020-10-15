@@ -1,6 +1,4 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {IUserService} from "./service/iuser.service";
 import {ActivatedRoute, Event, ParamMap, Router} from "@angular/router";
 import {Iloginrequest} from "./interface/Iloginrequest";
 import {ISong} from './interface/isong';

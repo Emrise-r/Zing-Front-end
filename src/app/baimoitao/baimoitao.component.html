@@ -6,7 +6,7 @@
       <div class="album-thumb">
         <img *ngIf="p.cover_art_url" src="{{p.cover_art_url}}" alt="">
         <div class="play-icon">
-          <a [routerLink]="''" class="video--play--btn" (click)="playSong(p.songId, $event)"><span class="icon-play-button"></span></a>
+          <a class="video--play--btn" (click)="playSong(p.songId, $event)"><span class="icon-play-button"></span></a>
         </div>
       </div>
       <div class="album-info">
