@@ -16,6 +16,11 @@ import {SearchSongComponent} from './search-song/search-song.component';
 import {ListArtistComponent} from './crudArtist/list-artist/list-artist.component';
 import {CreateArtistComponent} from './crudArtist/create-artist/create-artist.component';
 import {ArtistListSongComponent} from './crudArtist/artist-list-song/artist-list-song.component';
+import {CreteUserComponent} from './crudUser/crete-user/crete-user.component';
+import {EditUserComponent} from './crudUser/edit-user/edit-user.component';
+import {ListPlaylistComponent} from './crudPlaylist/list-playlist/list-playlist.component';
+import {CreatePlaylistComponent} from './crudPlaylist/create-playlist/create-playlist.component';
+import {EditPlaylistComponent} from './crudPlaylist/edit-playlist/edit-playlist.component';
 
 
 const routes: Routes = [
@@ -62,6 +67,26 @@ const routes: Routes = [
   {
     path: 'search/:name',
     component: SearchSongComponent
+  },
+  {
+    path: 'register',
+    component: CreteUserComponent
+  },
+  {
+    path: 'editUser',
+    component: EditUserComponent
+  },
+  {
+    path: 'myPlaylist',
+    component: ListPlaylistComponent
+  },
+  {
+    path: 'createPlaylist',
+    component: CreatePlaylistComponent
+  },
+  {
+    path: 'editPlaylist/:id',
+    component: EditPlaylistComponent
   },
   {
     path: 'artist',

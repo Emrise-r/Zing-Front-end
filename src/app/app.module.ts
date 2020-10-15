@@ -53,6 +53,11 @@ import { ArtistListSongComponent } from './crudArtist/artist-list-song/artist-li
     ListArtistComponent,
     CreateArtistComponent,
     ArtistListSongComponent,
+    CreteUserComponent,
+    EditUserComponent,
+    ListPlaylistComponent,
+    CreatePlaylistComponent,
+    EditPlaylistComponent,
 
   ],
   imports: [

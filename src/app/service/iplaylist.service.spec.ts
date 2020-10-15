@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IuserService } from './iuser.service';
+import { IplaylistService } from './iplaylist.service';
 
-describe('IuserService', () => {
-  let service: IuserService;
+describe('IplaylistService', () => {
+  let service: IplaylistService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(IuserService);
+    service = TestBed.inject(IplaylistService);
   });
 
   it('should be created', () => {
