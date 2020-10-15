@@ -21,6 +21,7 @@ import {EditUserComponent} from './crudUser/edit-user/edit-user.component';
 import {ListPlaylistComponent} from './crudPlaylist/list-playlist/list-playlist.component';
 import {CreatePlaylistComponent} from './crudPlaylist/create-playlist/create-playlist.component';
 import {EditPlaylistComponent} from './crudPlaylist/edit-playlist/edit-playlist.component';
+import {AllPlayListComponent} from "./crudPlaylist/all-play-list/all-play-list.component";
 
 
 const routes: Routes = [
@@ -112,6 +113,10 @@ const routes: Routes = [
     path: 'top30',
     component: Top30Component,
   },
+  {
+    path: 'allPlaylists',
+    component: AllPlayListComponent
+  }
 ];
 
 @NgModule({

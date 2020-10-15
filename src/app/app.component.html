@@ -21,7 +21,7 @@
       <a class="nav-link" href="index.html" style="color:#062c33;font-size: 17px">HOME <span
         class="sr-only">(current)</span></a>
 
-      <a class="nav-link" href="#" style="color: #062c33;font-size: 17px">PLAY LIST</a>
+      <a class="nav-link" [routerLink]="'/allPlaylists'" style="color: #062c33;font-size: 17px">PLAY LIST</a>
 
       <a class="nav-link" [routerLink]="'/top30'" style="color: #062c33;font-size: 17px">TOP 30</a>
 
@@ -50,7 +50,7 @@
                 Hi: {{loginRequest.username}}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">My Playlist</a>
+                <a class="dropdown-item" >My Playlist</a>
                 <a class="dropdown-item" [routerLink]="'/artist'">Artist Manage</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" [href]="'http://localhost:4200'" (click)="logOut()">Log Out</a>

@@ -16,6 +16,7 @@ export class Baimoitao30Component implements OnInit {
   songListDate30: ISong[] = [];
   playList: IPlayList[] = [];
   loginRequest: Iloginrequest = null;
+
   constructor(private iSongService: ISongService,
               private iPlaylistService: IplaylistService) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
@@ -45,4 +46,5 @@ export class Baimoitao30Component implements OnInit {
     })
     return this.playList
   }
+
 }

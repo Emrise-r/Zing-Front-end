@@ -35,6 +35,7 @@ import { EditUserComponent } from './crudUser/edit-user/edit-user.component';
 import { ListPlaylistComponent } from './crudPlaylist/list-playlist/list-playlist.component';
 import { CreatePlaylistComponent } from './crudPlaylist/create-playlist/create-playlist.component';
 import { EditPlaylistComponent } from './crudPlaylist/edit-playlist/edit-playlist.component';
+import { AllPlayListComponent } from './crudPlaylist/all-play-list/all-play-list.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { EditPlaylistComponent } from './crudPlaylist/edit-playlist/edit-playlis
     ListPlaylistComponent,
     CreatePlaylistComponent,
     EditPlaylistComponent,
+    AllPlayListComponent,
 
   ],
   imports: [
