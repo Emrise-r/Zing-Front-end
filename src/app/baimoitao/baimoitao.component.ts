@@ -18,6 +18,8 @@ import {observable, Observable} from "rxjs";
 export class BaimoitaoComponent implements OnInit {
   songListDate6: ISong[] = [];
 
+  currentList: number[] = [];
+
   @Output()
   changeSong = new EventEmitter<number>();
 
@@ -40,9 +42,23 @@ export class BaimoitaoComponent implements OnInit {
     return this.songListDate6;
   }
 
+  getAllSongByDate() {
+    this.currentList = [];
+    this.iSongService.getAllSongByDate().subscribe(p => {
+      p.forEach(index => {this.currentList.push(index.songId);})
+    },err => {
+      console.log(err)
+    }, () => {
+      this.cookie.delete('current-list','/');
+      this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
+      console.log(JSON.parse((this.cookie.get('current-list'))));
+    })
+  }
+
   playSong(songId, event) {
     this.cookie.set('current-song', `${songId}`,10000);
     console.log(this.cookie.get('current-song'));
+    this.getAllSongByDate()
     this.changeSong.emit();
   }
 }

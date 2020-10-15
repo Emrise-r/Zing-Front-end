@@ -5,7 +5,6 @@
     <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
       <div class="album-thumb">
         <img *ngIf="p.cover_art_url" src="{{p.cover_art_url}}" alt="">
-        <!--        <img #tmp src="assets/img/bg-img/a1.jpg" alt="">-->
         <div class="play-icon">
           <a [routerLink]="''" class="video--play--btn" (click)="playSong(p.songId, $event)"><span class="icon-play-button"></span></a>
         </div>

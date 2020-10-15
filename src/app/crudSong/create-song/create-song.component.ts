@@ -72,7 +72,7 @@ export class CreateSongComponent implements OnInit {
       console.log(event.target.files[0].size);
       const imgName = event.target.files[0].name.split('.').slice(1, 2);
       console.log(imgName);
-      if (imgName == 'png' || imgName == 'jpg' || imgName == 'gif') {
+      if (imgName == 'png' || imgName == 'jpg' || imgName == 'gif' || imgName == 'jpeg') {
         this.coverArtFileSelected = event.target.files[0];
         this.getCoverArtUrl();
         this.checkedCoverArtFile = false;

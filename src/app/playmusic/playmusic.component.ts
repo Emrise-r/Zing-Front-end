@@ -7,6 +7,7 @@ import {SongControllerService} from "../service/song-controller.service";
 import {CookieService} from "ngx-cookie-service";
 import {Observable} from "rxjs";
 import * as moment from "moment";
+import {isLineBreak} from 'codelyzer/angular/sourceMappingVisitor';
 
 @Component({
   selector: 'app-playmusic',
@@ -20,8 +21,9 @@ export class PlaymusicComponent implements OnInit {
   duration = "00:00";
   seek = 0;
   songName = 'unknown_songName';
-  artist = 'unknown_artist'
-  playing = false;
+  artist = 'unknown_artist';
+  playing = true;
+  listSong: number[] = [];
   audioEvent = [
     'ended',
     'error',
@@ -33,8 +35,10 @@ export class PlaymusicComponent implements OnInit {
     'loadedmetadata',
     'loadstart'
   ]
-
+  endedCountEvent = 0;
+  pauseCountEvent = 0;
   currentSong = null;
+  checked = false;
 
   constructor(
     private iSongService: ISongService,
@@ -42,9 +46,14 @@ export class PlaymusicComponent implements OnInit {
     private cookie: CookieService
   ) {
     songController.changeEmitted$.subscribe(x => {
-      this.currentSong = cookie.get('current-song');
+      if (this.currentSong != cookie.get('current-song')) {
+        this.currentSong = cookie.get('current-song');
+      }
       if( this.currentSong != null) {
         this.onChanges();
+      }
+      if (this.audioFile.ended) {
+        console.log()
       }
     });
   }
@@ -57,8 +66,8 @@ export class PlaymusicComponent implements OnInit {
   }
 
   onChanges() {
+    this.listSong = JSON.parse((this.cookie.get('current-list')));
     this.getSongById(parseInt(this.currentSong));
-
   }
 
   getSongById(id: number): void {
@@ -73,14 +82,15 @@ export class PlaymusicComponent implements OnInit {
     }
   }
 
-  play(){
+  playpause() {
     this.playing = !this.playing;
-    if(this.playing) {
-      this.audioFile.play().finally(() => console.log('end'));
-    } else {
-      this.pause();
-    }
+    if (this.playing) {
+      this.play();
+    } else this.pause();
+  }
 
+  play(){
+    this.audioFile.play().finally(() => console.log('play'));
   }
 
   pause(){
@@ -93,7 +103,7 @@ export class PlaymusicComponent implements OnInit {
   }
 
   openFile(song: ISong){
-    this.streamSong(song).subscribe();
+    this.streamSong(song).subscribe(() =>console.log('ended'));
   }
 
   setVolume(event) {
@@ -106,19 +116,25 @@ export class PlaymusicComponent implements OnInit {
       this.songName = this.song.name;
       this.artist = this.song.artist.name;
       this.audioFile.load();
-      this.audioFile.play().finally(() => console.log('end'));
-
-      const handler = (event: Event) => {
+      this.audioFile.play().finally(() => this.endedCountEvent = 0);
+      let handler = (event: Event) => {
         this.seek = this.audioFile.currentTime;
         this.currentTime = this.timeFormat(this.audioFile.currentTime);
         this.duration = this.timeFormat(this.audioFile.duration);
-
+        if(this.audioFile.ended){
+          this.endedCountEvent++;
+          if(this.endedCountEvent == 1){
+            this.nextSong();
+            console.log('next');
+          }
+        }
       }
-
       this.addEvent(this.audioFile, this.audioEvent, handler);
       return () => {
         this.audioFile.pause();
         this.audioFile.currentTime = 0;
+        this.nextSong();
+        // console.log('c')
         this.removeEvent(this.audioFile, this.audioEvent, handler);
       }
     })
@@ -132,6 +148,7 @@ export class PlaymusicComponent implements OnInit {
 
   removeEvent(audio, event, handler) {
     event.forEach(event => {
+      console.log('ended');
       audio.removeEventListener(event, handler);
     })
   }
@@ -143,5 +160,35 @@ export class PlaymusicComponent implements OnInit {
   timeFormat (time, format="HH:mm:ss") {
     const momentTime = time * 1000;
     return moment.utc(momentTime).format(format);
+  }
+
+  nextSong() {
+    let i = 0;
+    if(this.currentSong == this.listSong[this.listSong.length -1]) {
+      this.currentSong = this.listSong[0];
+    } else {
+      while (this.currentSong != this.listSong[i]) {
+        i++
+      }
+      this.currentSong = this.listSong[i + 1];
+    }
+    this.onChanges();
+    this.cookie.set('current-song', `${this.currentSong}`,10000);
+    // this.endedCountEvent;
+  }
+
+
+  previousSong(event) {
+    let i = 0;
+    if(this.currentSong == this.listSong[0]) {
+      console.log(event);
+    } else {
+      while (this.currentSong != this.listSong[i]) {
+        i++
+      }
+      this.currentSong = this.listSong[i - 1];
+    }
+    this.onChanges();
+    this.cookie.set('current-song', `${this.currentSong}`,10000);
   }
 }
