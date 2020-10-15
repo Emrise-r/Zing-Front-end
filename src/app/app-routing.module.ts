@@ -17,6 +17,7 @@ import {ListArtistComponent} from './crudArtist/list-artist/list-artist.componen
 import {CreateArtistComponent} from './crudArtist/create-artist/create-artist.component';
 import {ArtistListSongComponent} from './crudArtist/artist-list-song/artist-list-song.component';
 import {CreteUserComponent} from './crudUser/crete-user/crete-user.component';
+import {EditUserComponent} from './crudUser/edit-user/edit-user.component';
 
 
 const routes: Routes = [
@@ -67,6 +68,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: CreteUserComponent
+  },
+  {
+    path: 'editUser',
+    component: EditUserComponent
   },
   {
     path: 'artist',

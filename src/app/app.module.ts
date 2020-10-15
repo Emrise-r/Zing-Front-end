@@ -31,6 +31,7 @@ import { ListArtistComponent } from './crudArtist/list-artist/list-artist.compon
 import { CreateArtistComponent } from './crudArtist/create-artist/create-artist.component';
 import { ArtistListSongComponent } from './crudArtist/artist-list-song/artist-list-song.component';
 import { CreteUserComponent } from './crudUser/crete-user/crete-user.component';
+import { EditUserComponent } from './crudUser/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { CreteUserComponent } from './crudUser/crete-user/crete-user.component';
     CreateArtistComponent,
     ArtistListSongComponent,
     CreteUserComponent,
+    EditUserComponent,
 
   ],
   imports: [
