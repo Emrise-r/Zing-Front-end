@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
   }
 
   onChanges(){
-
     this.shareEvent.emitChange('123');
   }
 
