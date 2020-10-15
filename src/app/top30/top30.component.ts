@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ISong} from '../interface/isong';
 import {ISongService} from '../service/isong.service';
+import {IPlayList} from '../interface/i-play-list';
+import {Iloginrequest} from '../interface/Iloginrequest';
+import {IplaylistService} from '../service/iplaylist.service';
 
 
 @Component({
@@ -9,15 +12,24 @@ import {ISongService} from '../service/isong.service';
   styleUrls: ['./top30.component.scss']
 })
 export class Top30Component implements OnInit {
-songList30: ISong[] = [];
-  constructor(private iSongService: ISongService) { }
+  songList30: ISong[] = [];
+  playList: IPlayList[] = [];
+  loginRequest: Iloginrequest = null;
+
+
+  constructor(private iSongService: ISongService,
+              private iPlaylistService: IplaylistService) {
+    this.loginRequest = JSON.parse((sessionStorage.getItem('user')));
+  }
 
   ngOnInit(): void {
-  this.getAllSong30();
+    this.getAllSong30();
+    this.getPlayList();
   }
+
   getAllSong30(): ISong[] {
     this.iSongService.getAllSongByPlay().subscribe(p => {
-      if(p.length < 30) {
+      if (p.length < 30) {
         for (let i = 0; i < p.length; i++) {
           this.songList30.push(p[i]);
         }
@@ -28,5 +40,12 @@ songList30: ISong[] = [];
       }
     });
     return this.songList30;
+  }
+
+  getPlayList(): IPlayList[] {
+    this.iPlaylistService.getPlayListByUser(this.loginRequest.id).subscribe(pr => {
+      this.playList = pr;
+    });
+    return this.playList;
   }
 }

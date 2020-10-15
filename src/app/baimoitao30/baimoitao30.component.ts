@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ISong} from '../interface/isong';
 import {ISongService} from '../service/isong.service';
+import {IplaylistService} from '../service/iplaylist.service';
+import {IPlayList} from '../interface/i-play-list';
+import {Iloginrequest} from '../interface/Iloginrequest';
 
 
 @Component({
@@ -9,12 +12,18 @@ import {ISongService} from '../service/isong.service';
   styleUrls: ['./baimoitao30.component.scss']
 })
 export class Baimoitao30Component implements OnInit {
+
   songListDate30: ISong[] = [];
-  constructor(private iSongService: ISongService) {
+  playList: IPlayList[] = [];
+  loginRequest: Iloginrequest = null;
+  constructor(private iSongService: ISongService,
+              private iPlaylistService: IplaylistService) {
+    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     this.getAllSong30();
   }
 
   ngOnInit(): void {
+    this.getPlayList();
   }
   getAllSong30(): ISong[] {
     this.iSongService.getAllSongByDate().subscribe(p => {
@@ -29,5 +38,11 @@ export class Baimoitao30Component implements OnInit {
       }
      })
     return this.songListDate30;
+  }
+  getPlayList(): IPlayList[] {
+    this.iPlaylistService.getPlayListByUser(this.loginRequest.id).subscribe(pr => {
+      this.playList = pr
+    })
+    return this.playList
   }
 }
