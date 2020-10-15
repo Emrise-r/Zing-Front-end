@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ISong} from '../interface/isong';
 import {ISongService} from '../service/isong.service';
+import {CookieService} from 'ngx-cookie-service';
 
 
 @Component({
@@ -10,7 +11,10 @@ import {ISongService} from '../service/isong.service';
 })
 export class Baimoitao30Component implements OnInit {
   songListDate30: ISong[] = [];
-  constructor(private iSongService: ISongService) {
+  constructor(
+    private iSongService: ISongService,
+    private cookie: CookieService,
+  ) {
     this.getAllSong30();
   }
 
