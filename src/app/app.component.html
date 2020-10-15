@@ -29,7 +29,7 @@
          style="color: #062c33;font-size: 17px">NEW SONGS</a>
 
       <a class="nav-link disabled" [routerLink]="'/artist'" tabindex="-1" aria-disabled="true"
-         style="color: #062c33;font-size: 17px">SINGER</a>
+         style="color: #062c33;font-size: 17px">ARTIST</a>
 
       <form class="form-inline my-2 my-lg-0" style="margin-left: 10%">
         <input class="form-control mr-sm-2" type="search" name="search " formControlName="search"
@@ -85,7 +85,7 @@
 <!--slideshow dau trang-->
 
 <router-outlet (activate)="onChanges()" (deactivate)='onChanges()'></router-outlet>
-<app-playmusic></app-playmusic>
+<!--<app-playmusic></app-playmusic>-->
 
 <footer class="footer-area">
   <div class="container">
