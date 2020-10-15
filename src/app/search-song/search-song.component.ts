@@ -3,6 +3,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {ISong} from '../interface/isong';
 import {ISongService} from '../service/isong.service';
+import {SearchSongsService} from '../service/search-songs.service';
 
 @Component({
   selector: 'app-search-song',
@@ -13,14 +14,22 @@ export class SearchSongComponent implements OnInit {
   sub: Subscription;
   songs: ISong[] = [];
   name: string;
-  constructor(private activatedRoute: ActivatedRoute,
-              private iSongService: ISongService) { }
-
-  ngOnInit(): void {
-    this.sub = this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) =>{
-   this.name = paramMap.get('name');
-    });
-    this.iSongService.searchSongByName(this.name).subscribe(p => this.songs = p);
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private iSongService: ISongService,
+    private searchSongsService: SearchSongsService
+  ) {
+    searchSongsService.changeEmitted$.subscribe(x =>{
+      this.name = x;
+      this.searchSongs()
+    })
   }
 
+  ngOnInit(): void {
+
+  }
+
+  searchSongs() {
+    this.iSongService.searchSongByName(this.name).subscribe(p => this.songs = p);
+  }
 }

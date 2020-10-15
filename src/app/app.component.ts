@@ -6,6 +6,7 @@ import {CookieService} from "ngx-cookie-service";
 import {ShareEventService} from "./service/share-event.service";
 import {SongControllerService} from "./service/song-controller.service";
 import {Observable} from "rxjs";
+import {SearchSongsService} from './service/search-songs.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit, OnChanges{
     private router: ActivatedRoute,
     private cookie: CookieService,
     private shareEvent: ShareEventService,
-    private songController: SongControllerService
+    private songController: SongControllerService,
+    private searchSongsService: SearchSongsService
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     // console.log(this.loginRequest.roles[0])
@@ -36,7 +38,7 @@ export class AppComponent implements OnInit, OnChanges{
   onChanges() {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     const newSong = this.cookie.get('current-song');
-    console.log(newSong);
+    // console.log(newSong);
     if(this.currentSong != newSong) {
       this.playing = false;
       this.currentSong = newSong;
@@ -53,6 +55,10 @@ export class AppComponent implements OnInit, OnChanges{
 
   logOut(): void {
     sessionStorage.removeItem("user")
+  }
+
+  searchSongs(search) {
+    this.searchSongsService.emitChange(search);
   }
 
 }

@@ -36,7 +36,7 @@
                placeholder="Search" aria-label="Search" style="background: #f4ffea" #search>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
           <a style="color: currentColor"
-             [href]="'http://localhost:4200/search/' + this.search.value">search</a>
+             [routerLink]="'search'" (click)="searchSongs(this.search.value)">search</a>
         </button>
       </form>
 

@@ -176,7 +176,7 @@ export class PlaymusicComponent implements OnInit {
     if(this.currentSong == this.listSong[this.listSong.length -1]) {
       this.currentSong = this.listSong[0];
     } else {
-      while (this.currentSong != this.listSong[i]) {
+      while (this.currentSong != this.listSong[i] && i < this.listSong[this.listSong.length -1]) {
         i++
       }
       this.currentSong = this.listSong[i + 1];

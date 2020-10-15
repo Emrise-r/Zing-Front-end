@@ -56,8 +56,6 @@ export class Top30Component implements OnInit {
     },err => {
       console.log(err)
     }, () => {
-      this.cookie.delete('current-list','/');
-      this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
       // console.log(JSON.parse((this.cookie.get('current-list'))));
     });
     return this.songList30;
@@ -83,8 +81,8 @@ export class Top30Component implements OnInit {
   playSong(songId) {
     this.cookie.delete('current-song','/');
     this.cookie.set('current-song', `${songId}`,10000);
-    // console.log(this.cookie.get('current-song'));
-    this.getAllSong30();
+    this.cookie.delete('current-list','/');
+    this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
     this.shareEvent.emitChange('123');
   }
 }

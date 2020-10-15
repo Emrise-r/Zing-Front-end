@@ -67,7 +67,7 @@ const routes: Routes = [
     component: CreateSongComponent
   },
   {
-    path: 'search/:name',
+    path: 'search',
     component: SearchSongComponent
   },
   {

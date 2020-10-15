@@ -43,8 +43,7 @@ export class ArtistListSongComponent implements OnInit {
     }, err => {
       console.log(err)
     }, () => {
-      this.cookie.delete('current-list','/');
-      this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
+
       // console.log(JSON.parse((this.cookie.get('current-list'))));
     });
     return this.songs;
@@ -53,6 +52,8 @@ export class ArtistListSongComponent implements OnInit {
   playSong(songId) {
     this.cookie.delete('current-song','/');
     this.cookie.set('current-song', `${songId}`,10000);
+    this.cookie.delete('current-list','/');
+    this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
     // console.log(this.cookie.get('current-song'));
     this.getAllSongByArtist();
     this.shareEvent.emitChange('123');

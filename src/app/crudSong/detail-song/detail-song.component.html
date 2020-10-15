@@ -14,8 +14,17 @@
   <h3>Song detail:</h3>
   <div *ngIf="song">
     <div>
-    <span class="font-weight-bold"></span><img src="{{song.cover_art_url}}" alt=""
-                                               style="width: 200px;height: 200px"><br>
+    <span class="font-weight-bold"></span>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+      <div class="single-album-area wow fadeInUp" data-wow-delay="100ms">
+      <div class="album-thumb">
+        <img src="{{song.cover_art_url}}" alt="" style="width: 200px;height: 200px"><br>
+        <div class="play-icon">
+          <a class="video--play--btn" (click)="playSong(song.songId)"><span class="icon-play-button"></span></a>
+        </div>
+      </div>
+      </div>
+      </div>
     </div>
 
     <span class="font-weight-bold">Name: </span><span>{{song.name}}</span><br>

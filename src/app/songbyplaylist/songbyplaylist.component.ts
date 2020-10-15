@@ -6,6 +6,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Iloginrequest} from '../interface/Iloginrequest';
 import {IplaylistService} from '../service/iplaylist.service';
 import {IPlayList} from '../interface/i-play-list';
+import {CookieService} from 'ngx-cookie-service';
+import {ShareEventService} from '../service/share-event.service';
 
 @Component({
   selector: 'app-songbyplaylist',
@@ -19,15 +21,18 @@ export class SongbyplaylistComponent implements OnInit {
   iPlaylistSongs: IPlaylistSong[];
   loginRequest: Iloginrequest = null;
   playlist: IPlayList;
+  currentList: number[] = [];
 
   constructor(
     private playlistSongService: PlaylistSongService,
     private activatedRoute: ActivatedRoute,
     private getPlaylist: IplaylistService,
-    private router: Router
+    private router: Router,
+    private cookie: CookieService,
+    private shareEvent: ShareEventService
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem('user')));
-    console.log(this.loginRequest.id)
+    // console.log(this.loginRequest.id)
   }
 
   ngOnInit(): void {
@@ -47,11 +52,7 @@ export class SongbyplaylistComponent implements OnInit {
       this.iPlaylistSongs.forEach( item => {
         this.songs.push(item.song);
       })
-      // for(let i = 0; i < this.iPlaylistSongs.length; i++) {
-      //   this.songs.push(this.iPlaylistSongs[i].song)
-      // }
-      console.log(this.songs);
-      console.log(this.songs[0].user.userId);
+        this.songs.forEach(index => {this.currentList.push(index.songId)});
     })
   }
 
@@ -66,6 +67,17 @@ export class SongbyplaylistComponent implements OnInit {
       this.songs = [];
       this.getAllSongByPlayList(this.id)
       });
+  }
+
+  playSong(songId) {
+    console.log(this.currentList);
+    this.cookie.delete('current-song','/');
+    this.cookie.set('current-song', `${songId}`,10000);
+    this.cookie.delete('current-list','/');
+    this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
+    console.log(this.cookie.get('current-song'));
+    this
+    this.shareEvent.emitChange('123');
   }
 
 }
