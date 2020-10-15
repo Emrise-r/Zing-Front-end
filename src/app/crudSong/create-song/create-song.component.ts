@@ -190,12 +190,12 @@ export class CreateSongComponent implements OnInit {
     }
   }
 
-  getArtist(id) {
+  getArtist(id): void {
     this.artist.id = parseInt(id);
     this.selectedArtist = this.artist;
   }
 
-  getEvent(event){
+  getEvent(event): void{
     console.log('input');
     console.log(event);
   }

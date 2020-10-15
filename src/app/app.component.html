@@ -23,7 +23,7 @@
 
       <a class="nav-link" href="#" style="color: #062c33;font-size: 17px">PLAY LIST</a>
 
-      <a class="nav-link" [routerLink]="'/top30'" style="color: #062c33;font-size: 17px">TOP 100</a>
+      <a class="nav-link" [routerLink]="'/top30'" style="color: #062c33;font-size: 17px">TOP 30</a>
 
       <a class="nav-link disabled" [routerLink]="'/newSong30'" tabindex="-1" aria-disabled="true"
          style="color: #062c33;font-size: 17px">NEW SONGS</a>
@@ -74,7 +74,7 @@
           </div>
         </div>
         <ng-template #tmp>
-          <a [routerLink]="'/login'" >Login</a> | <a>Register</a>
+          <a [routerLink]="'/login'" >Login</a> | <a [routerLink]="'/register'">Register</a>
         </ng-template>
       </div>
     </ul>
