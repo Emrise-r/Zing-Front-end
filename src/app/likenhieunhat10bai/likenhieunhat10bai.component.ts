@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ISong} from '../interface/isong';
 import {ISongService} from '../service/isong.service';
+import {CookieService} from "ngx-cookie-service";
 
 
 @Component({
@@ -11,8 +12,13 @@ import {ISongService} from '../service/isong.service';
 export class Likenhieunhat10baiComponent implements OnInit {
   songListLike6: ISong[] = [];
   songListLike30: ISong[] = [];
+  currentList: number[] = [];
 
-  constructor(private iSongService: ISongService) {
+  @Output()
+  changeSongLike = new EventEmitter<number>();
+
+  constructor(private iSongService: ISongService,
+              private cookie: CookieService,) {
   }
 
   ngOnInit(): void {
@@ -35,5 +41,23 @@ export class Likenhieunhat10baiComponent implements OnInit {
       }
     });
     return this.songListLike30;
+  }
+  getAllSongByLike() {
+    this.currentList = [];
+    this.iSongService.getAllSongByLikes().subscribe(p => {
+      p.forEach(index => {this.currentList.push(index.songId);})
+    },err => {
+      console.log(err)
+    }, () => {
+      this.cookie.delete('current-list','/');
+      this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
+      console.log(JSON.parse((this.cookie.get('current-list'))));
+    })
+  }
+  playSong(songId, event) {
+    this.cookie.set('current-song', `${songId}`,10000);
+    console.log(this.cookie.get('current-song'));
+    this.getAllSongByLike()
+    this.changeSongLike.emit();
   }
 }

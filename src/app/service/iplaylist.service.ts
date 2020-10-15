@@ -25,5 +25,8 @@ export class IplaylistService {
   updatePlaylist(id: number, playlist: IPlayList): Observable<IPlayList> {
     return this.http.put<IPlayList>(API_URL+ `/update-playlist/${id}`, playlist)
   }
+  getAllPlayLists():Observable<IPlayList[]>{
+    return this.http.get<IPlayList[]>(API_URL)
+  }
 
 }

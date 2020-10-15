@@ -39,7 +39,7 @@ export class PlaymusicComponent implements OnInit {
   pauseCountEvent = 0;
   currentSong = null;
   checked = false;
-
+  checkplay = false;
   constructor(
     private iSongService: ISongService,
     private songController: SongControllerService,
@@ -62,7 +62,6 @@ export class PlaymusicComponent implements OnInit {
     if (this.currentSong != null){
       this.onChanges();
     }
-    console.log('init')
   }
 
   onChanges() {
@@ -73,8 +72,8 @@ export class PlaymusicComponent implements OnInit {
   getSongById(id: number): void {
     this.iSongService.getSongByID(id).subscribe(p => {
       this.song = p;
-      console.log(this.song);
     },error => console.log('err'),() => this.openFile(this.song))
+
   }
 
   getUrl(){
@@ -85,16 +84,26 @@ export class PlaymusicComponent implements OnInit {
   playpause() {
     this.playing = !this.playing;
     if (this.playing) {
+      this.checkplay = true;
       this.play();
-    } else this.pause();
+
+    } else
+      this.pause();
+      this.checkplay = false;
+
   }
 
   play(){
     this.audioFile.play().finally(() => console.log('play'));
+    document.getElementById("playbutton").classList.remove("fa-play");
+    document.getElementById("playbutton").classList.add("fa-pause");
+
   }
 
   pause(){
     this.audioFile.pause();
+    document.getElementById("playbutton").classList.remove("fa-pause");
+    document.getElementById("playbutton").classList.add("fa-play");
   }
 
   stop() {

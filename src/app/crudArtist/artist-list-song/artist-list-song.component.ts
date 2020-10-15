@@ -16,12 +16,11 @@ export class ArtistListSongComponent implements OnInit {
     id: 0,
     name: ""
   };
-
+  loginRequest: Iloginrequest;
   constructor(private iSongService: ISongService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
-    // const id = +this.activatedRoute.snapshot.paramMap.get('id');
-
+    this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
   }
 
   ngOnInit(): void {

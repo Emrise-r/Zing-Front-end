@@ -25,17 +25,18 @@
     </a></td>
     <td><div class="dropdown">
       <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
       </a>
-
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" style="color:#000000" [routerLink]="'/createPlaylist'">New Playlist  +</a>
-        <div class="dropdown-divider"  ></div>
-        <div *ngFor="let pr of playList">
-          <a class="dropdown-item" style="color:#6c757d" (click)="addPlaylistSong(p, pr)">{{pr.name}}</a>
+        <div *ngIf="loginRequest!=null; else tmp">
+          <a class="dropdown-item" style="color:#000000" [routerLink]="'/createPlaylist'">New Playlist  +</a>
+          <div class="dropdown-divider"  ></div>
+          <div *ngFor="let pr of playList">
+            <a class="dropdown-item" style="color:#6c757d" (click)="addPlaylistSong(p, pr)">{{pr.name}}</a>
+          </div>
         </div>
-
-
+        <ng-template #tmp>
+          <p>Please Login...</p>
+        </ng-template>
       </div>
     </div></td>
 

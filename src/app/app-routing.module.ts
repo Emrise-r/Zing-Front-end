@@ -22,6 +22,7 @@ import {ListPlaylistComponent} from './crudPlaylist/list-playlist/list-playlist.
 import {CreatePlaylistComponent} from './crudPlaylist/create-playlist/create-playlist.component';
 import {EditPlaylistComponent} from './crudPlaylist/edit-playlist/edit-playlist.component';
 import {SongbyplaylistComponent} from './songbyplaylist/songbyplaylist.component';
+import {AllPlayListComponent} from "./crudPlaylist/all-play-list/all-play-list.component";
 
 
 const routes: Routes = [
@@ -116,6 +117,10 @@ const routes: Routes = [
   {
     path: 'songByPlaylist/:id',
     component: SongbyplaylistComponent,
+  },
+  {
+    path: 'allPlaylists',
+    component: AllPlayListComponent
   }
 ];
 
