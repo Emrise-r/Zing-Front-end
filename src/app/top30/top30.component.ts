@@ -6,6 +6,8 @@ import {Iloginrequest} from '../interface/Iloginrequest';
 import {IplaylistService} from '../service/iplaylist.service';
 import {IPlaylistSong} from '../interface/iplaylistsong';
 import {PlaylistSongService} from '../service/playlist-song.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ShareEventService} from '../service/share-event.service';
 
 
 @Component({
@@ -14,10 +16,11 @@ import {PlaylistSongService} from '../service/playlist-song.service';
   styleUrls: ['./top30.component.scss']
 })
 export class Top30Component implements OnInit {
+
   songList30: ISong[] = [];
   playList: IPlayList[] = [];
   loginRequest: Iloginrequest = null;
-
+  currentList: number[] = [];
   playlistSong: IPlaylistSong = {
     playlist: null,
     song: null
@@ -26,7 +29,9 @@ export class Top30Component implements OnInit {
   constructor(
     private iSongService: ISongService,
     private iPlaylistService: IplaylistService,
-    private playlistSongService: PlaylistSongService
+    private playlistSongService: PlaylistSongService,
+    private cookie: CookieService,
+    private shareEvent: ShareEventService
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem('user')));
   }
@@ -47,6 +52,13 @@ export class Top30Component implements OnInit {
           this.songList30.push(p[i]);
         }
       }
+      p.forEach(index => {this.currentList.push(index.songId)})
+    },err => {
+      console.log(err)
+    }, () => {
+      this.cookie.delete('current-list','/');
+      this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
+      // console.log(JSON.parse((this.cookie.get('current-list'))));
     });
     return this.songList30;
   }
@@ -66,5 +78,13 @@ export class Top30Component implements OnInit {
     this.playlistSongService.addPlaylistSong(this.playlistSong).subscribe(() =>
       console.log('up')
     );
+  }
+
+  playSong(songId) {
+    this.cookie.delete('current-song','/');
+    this.cookie.set('current-song', `${songId}`,10000);
+    // console.log(this.cookie.get('current-song'));
+    this.getAllSong30();
+    this.shareEvent.emitChange('123');
   }
 }

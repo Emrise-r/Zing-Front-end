@@ -13,7 +13,8 @@
     <th scope="col">#</th>
     <th scope="col">Img</th>
     <th scope="col">Name</th>
-    <th scope="col">Action</th>
+    <th scope="col">Add Playlist</th>
+    <th scope="col">Play</th>
   </tr>
   </thead>
   <tbody >
@@ -23,7 +24,8 @@
     <td> <a [routerLink]="'/detail/' + p.songId"  >
       <h6>{{p.name}}</h6>
     </a></td>
-    <td><div class="dropdown">
+    <td>
+      <div class="dropdown">
       <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -38,8 +40,13 @@
           <p>Please Login...</p>
         </ng-template>
       </div>
-    </div></td>
-
+      </div>
+    </td>
+    <td>
+      <div>
+        <button class="fa fa-play" (click)="playSong(p.songId)"></button>
+      </div>
+    </td>
   </tr>
   </tbody>
 </table>

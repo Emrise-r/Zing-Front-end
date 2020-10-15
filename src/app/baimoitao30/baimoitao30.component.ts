@@ -6,6 +6,8 @@ import {IPlayList} from '../interface/i-play-list';
 import {Iloginrequest} from '../interface/Iloginrequest';
 import {IPlaylistSong} from '../interface/iplaylistsong';
 import {PlaylistSongService} from '../service/playlist-song.service';
+import {CookieService} from 'ngx-cookie-service';
+import {ShareEventService} from '../service/share-event.service';
 
 
 @Component({
@@ -22,10 +24,14 @@ export class Baimoitao30Component implements OnInit {
   songListDate30: ISong[] = [];
   playList: IPlayList[] = [];
   loginRequest: Iloginrequest = null;
+  currentList: number[] = [];
+
   constructor(
     private iSongService: ISongService,
     private iPlaylistService: IplaylistService,
-    private playlistSongService: PlaylistSongService
+    private playlistSongService: PlaylistSongService,
+    private cookie: CookieService,
+    private shareEvent: ShareEventService
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     this.getAllSong30();
@@ -45,7 +51,14 @@ export class Baimoitao30Component implements OnInit {
           this.songListDate30.push(p[i])
         }
       }
-     })
+        p.forEach(index => {this.currentList.push(index.songId)})
+     }, err => {
+      console.log(err)
+    }, () => {
+      this.cookie.delete('current-list','/');
+      this.cookie.set('current-list',JSON.stringify(this.currentList),10000);
+      // console.log(JSON.parse((this.cookie.get('current-list'))));
+    });
     return this.songListDate30;
   }
   getPlayList(): IPlayList[] {
@@ -63,5 +76,13 @@ export class Baimoitao30Component implements OnInit {
     this.playlistSongService.addPlaylistSong(this.playlistSong).subscribe(() =>
       console.log('up')
     );
+  }
+
+  playSong(songId) {
+    this.cookie.delete('current-song','/');
+    this.cookie.set('current-song', `${songId}`,10000);
+    // console.log(this.cookie.get('current-song'));
+    this.getAllSong30();
+    this.shareEvent.emitChange('123');
   }
 }
