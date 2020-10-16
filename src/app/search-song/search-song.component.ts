@@ -14,6 +14,7 @@ export class SearchSongComponent implements OnInit {
   sub: Subscription;
   songs: ISong[] = [];
   name: string;
+  message: string;
   constructor(
     private activatedRoute: ActivatedRoute,
     private iSongService: ISongService,
@@ -30,6 +31,11 @@ export class SearchSongComponent implements OnInit {
   }
 
   searchSongs() {
-    this.iSongService.searchSongByName(this.name).subscribe(p => this.songs = p);
+    this.iSongService.searchSongByName(this.name).subscribe(p => {
+      this.songs = p
+      if (this.songs.length == 0) {
+        this.message = "Your Song Doesn't exist";
+      } else this.message = null;
+    });
   }
 }

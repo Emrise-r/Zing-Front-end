@@ -40,10 +40,12 @@ export class PlaymusicComponent implements OnInit {
   currentSong = null;
   checked = false;
   checkplay = false;
+
   constructor(
     private iSongService: ISongService,
     private songController: SongControllerService,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private service: ISongService,
   ) {
     songController.changeEmitted$.subscribe(x => {
       if (this.currentSong != cookie.get('current-song')) {
@@ -97,7 +99,6 @@ export class PlaymusicComponent implements OnInit {
     this.audioFile.play().finally(() => console.log('play'));
     document.getElementById("playbutton").classList.remove("fa-play");
     document.getElementById("playbutton").classList.add("fa-pause");
-
   }
 
   pause(){
@@ -125,7 +126,14 @@ export class PlaymusicComponent implements OnInit {
       this.songName = this.song.name;
       this.artist = this.song.artist.name;
       this.audioFile.load();
-      this.audioFile.play().finally(() => this.endedCountEvent = 0);
+      this.audioFile.play().finally(() => {
+        this.endedCountEvent = 0
+        this.song.plays = this.song.plays + 1;
+        console.log(this.song.plays);
+        this.service.createSong(this.song).subscribe(x => {
+          console.log(x.plays)
+        })
+      });
       let handler = (event: Event) => {
         this.seek = this.audioFile.currentTime;
         this.currentTime = this.timeFormat(this.audioFile.currentTime);
