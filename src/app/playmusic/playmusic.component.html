@@ -9,7 +9,7 @@
           <img *ngIf="song != null && song.cover_art_url" src="{{song.cover_art_url}}" alt="" style="width:50px;height:50px">
         </span>
         <span style="margin-left:2%;color:#CCCCCC;font-size:2.5vh" *ngIf="song != null && song.name ">{{song.name}}</span>
-        <span style="margin-left:2%;color:#0a1817;font-size:2.5vh" *ngIf="song != null && song.artist.name">--- {{song.artist.name}}</span>
+        <span style="margin-left:2%;color:#1abc9c;font-size:2.5vh" *ngIf="song != null && song.artist.name">{{"-    " + song.artist.name}}</span>
       </div>
 
       <div id="menu" style="float: left; margin-left: 30%">

@@ -55,6 +55,7 @@ export class AppComponent implements OnInit, OnChanges{
 
   logOut(): void {
     sessionStorage.removeItem("user")
+    this.loginRequest = JSON.parse((sessionStorage.getItem("user")))
   }
 
   searchSongs(search) {
