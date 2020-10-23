@@ -13,7 +13,7 @@ import {SearchSongsService} from './service/search-songs.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnChanges{
+export class AppComponent implements OnInit{
   event: any;
   playing: boolean = true;
 
@@ -30,13 +30,16 @@ export class AppComponent implements OnInit, OnChanges{
   ) {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
     // console.log(this.loginRequest.roles[0])
-    shareEvent.changeEmitted$.subscribe(x => this.onChanges())
+    shareEvent.changeEmitted$.subscribe(x => this.changes())
   }
 
   ngOnInit(): void {
   }
   onChanges() {
     this.loginRequest = JSON.parse((sessionStorage.getItem("user")));
+  }
+
+  changes() {
     const newSong = this.cookie.get('current-song');
     // console.log(newSong);
     if(this.currentSong != newSong) {
@@ -44,12 +47,6 @@ export class AppComponent implements OnInit, OnChanges{
       this.currentSong = newSong;
       this.playing = true;
       this.songController.emitChange(this.currentSong);
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if ('event' in changes) {
-      this.onChanges()
     }
   }
 
